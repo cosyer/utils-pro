@@ -1,9 +1,9 @@
 declare namespace rook {
   /**
    *
-   * @desc 判断两个数组是否相等
-   * @param {Array} arr1
-   * @param {Array} arr2
+   * @desc 判断两个数组(内容/非对象)是否相等
+   * @param {Array} arr1 数组1
+   * @param {Array} arr2 数组2
    * @return {Boolean}
    */
   export function arrayEqual(arr1: Array<any>, arr2: Array<any>): boolean;
@@ -11,16 +11,16 @@ declare namespace rook {
   /**
    *
    * @desc   为元素添加class
-   * @param  {HTMLElement} ele
-   * @param  {String} cls
+   * @param  {HTMLElement} ele HTMl元素
+   * @param  {String} cls 类名
    */
   export function addClass(ele: HTMLElement, cls: string): void;
 
   /**
    *
    * @desc 判断元素是否有某个class
-   * @param {HTMLElement} ele
-   * @param {String} cls
+   * @param {HTMLElement} ele HTML元素
+   * @param {String} cls 类名
    * @return {Boolean}
    */
   export function hasClass(ele: HTMLElement, cls: string): boolean;
@@ -28,8 +28,8 @@ declare namespace rook {
   /**
    *
    * @desc 为元素移除class
-   * @param {HTMLElement} ele
-   * @param {String} cls
+   * @param {HTMLElement} ele HTML元素
+   * @param {String} cls 类名
    */
   export function removeClass(ele: HTMLElement, cls: string): boolean;
 

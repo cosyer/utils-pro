@@ -6,6 +6,13 @@
  * @return {Boolean}
  */
 function hasClass(ele, cls) {
+  // String对象的方法
+  // return ele.className.indexOf(cls) !== -1;
+  // return ele.className.search(cls) !== -1;
+  // return ele.className.match(cls) !== null;
+
+  // RegExp 对象方法
+  // return new RegExp("(\\s|^)" + cls + "(\\s|$)").exec(ele.className) !== null;
   return new RegExp("(\\s|^)" + cls + "(\\s|$)").test(ele.className);
 }
 
