@@ -1,5 +1,9 @@
 ## 一些常用的 JavaScript 工具函数
 
+[![](https://img.shields.io/npm/v/utils-pro.svg?style=flat)](https://npmjs.com/package/utils-pro)
+[![](https://img.shields.io/npm/dm/utils-pro.svg?style=flat)](https://npmjs.com/package/utils-pro)
+[![](https://img.shields.io/bundlephobia/minzip/utils-pro.svg?style=flat)](https://bundlephobia.com/result?p=utils-pro)
+
 `utils-pro` 提供常用的一些工具函数和方法
 
 ### 引入方式
@@ -40,11 +44,6 @@ import getOS from 'utils-pro/lib/getOS';
 [API文档](https://cosyer.github.io/utils-pro/)
 
 to do
-
-[![](https://img.shields.io/npm/v/utils-pro.svg?style=flat)](https://npmjs.com/package/utils-pro)
-[![](https://img.shields.io/npm/dm/utils-pro.svg?style=flat)](https://npmjs.com/package/utils-pro)
-[![](https://img.shields.io/bundlephobia/minzip/utils-pro.svg?style=flat)](https://bundlephobia.com/result?p=utils-pro)
-
 
 - [ ] travis-ci持续集成
 - [ ] 测试用例/覆盖率
