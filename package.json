@@ -1,5 +1,5 @@
 {
-  "name": "rook",
+  "name": "utils-pro",
   "version": "1.0.0",
   "description": "一些常用的 JavaScript 工具函数",
   "main": "dist/rook.min.js",
@@ -10,6 +10,14 @@
     "build-pack": "node script/build-pack",
     "build-doc": "node script/build-copy;jsdoc ./"
   },
+  "files": [
+    "index.d.ts",
+    "lib",
+    "dist",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:cosyer/utils-pro.git"

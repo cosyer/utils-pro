@@ -16,8 +16,8 @@ rm(path.resolve(rootPath, "dist", `${pkg.name}.min.js`), err => {
   if (err) throw err;
   webpack(config, function(err, stats) {
     if (err) throw err;
-    // 删除temp文件夹
-    // deleteFolder(path.resolve(rootPath, "temp"));
+    // 删除lib文件夹
+    // deleteFolder(path.resolve(rootPath, "lib"));
     building.stop();
     process.stdout.write(
       stats.toString({
