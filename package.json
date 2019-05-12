@@ -1,6 +1,6 @@
 {
   "name": "utils-pro",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "一些常用的 JavaScript 工具函数",
   "main": "dist/rook.min.js",
   "types": "index.d.ts",
@@ -8,7 +8,7 @@
     "build": "node script/build.js",
     "build-copy": "node script/build-copy.js",
     "build-pack": "node script/build-pack",
-    "build-doc": "node script/build-copy;jsdoc ./"
+    "build-doc": "node script/build-copy;jsdoc ./lib"
   },
   "files": [
     "index.d.ts",

@@ -50,7 +50,7 @@ declare namespace rook {
    *
    * @desc   获取兄弟节点
    * @param  {HTMLElement} ele HTMl元素
-   * @returns {Array} eleMatch 兄弟节点的数组
+   * @returns {Array} 兄弟节点的数组
    */
   export function siblings(ele: HTMLElement): Array<HTMLElement>;
 
@@ -62,7 +62,15 @@ declare namespace rook {
    * @returns  {String} css属性值
    */
 
-export function getByStyle(ele: HTMLElement, name: string): string{
+  export function getByStyle(ele: HTMLElement, name: string): string;
+
+  /**
+   *
+   * @desc   html转成字符串
+   * @param  {HTMLElement} ele HTMl元素
+   * @returns {String} html字符串
+   */
+  export function html2Str(ele: HTMLElement): string;
 
   /**
    *

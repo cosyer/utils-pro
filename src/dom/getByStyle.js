@@ -3,6 +3,7 @@
  * @desc   获取行间样式属性
  * @param  {HTMLElement} ele HTMl元素
  * @param  {String} name css属性名称
+ * @returns  {String} css属性值
  */
 
 function getByStyle(ele, name) {

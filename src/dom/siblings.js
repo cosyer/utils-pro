@@ -2,7 +2,7 @@
  *
  * @desc   获取兄弟节点
  * @param  {HTMLElement} ele HTMl元素
- * @returns {Array} eleMatch 兄弟节点的数组
+ * @returns {Array} 兄弟节点的数组
  */
 
 function siblings(ele) {
