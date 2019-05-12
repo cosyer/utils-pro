@@ -31,7 +31,38 @@ declare namespace rook {
    * @param {HTMLElement} ele HTML元素
    * @param {String} cls 类名
    */
-  export function removeClass(ele: HTMLElement, cls: string): boolean;
+  export function removeClass(ele: HTMLElement, cls: string): void;
+
+  /**
+   *
+   * @desc 为元素替换class
+   * @param {HTMLElement} ele HTML元素
+   * @param {String} oldCls 移除的类名
+   * @param {String} newCls 新增的类名
+   */
+  export function replaceClass(
+    ele: HTMLElement,
+    oldcls: string,
+    newcls: string
+  ): void;
+
+  /**
+   *
+   * @desc   获取兄弟节点
+   * @param  {HTMLElement} ele HTMl元素
+   * @returns {Array} eleMatch 兄弟节点的数组
+   */
+  export function siblings(ele: HTMLElement): Array<HTMLElement>;
+
+  /**
+   *
+   * @desc   获取行间样式属性
+   * @param  {HTMLElement} ele HTMl元素
+   * @param  {String} name css属性名称
+   * @returns  {String} css属性值
+   */
+
+export function getByStyle(ele: HTMLElement, name: string): string{
 
   /**
    *

@@ -15,6 +15,8 @@ function removeClass(ele, cls) {
     // 现代浏览器
     // ele.classList.remove(cls);
     // ele.getAttribute("class").replace(reg, " ");
+  } else {
+    throw new Error("no such class");
   }
 }
 module.exports = removeClass;

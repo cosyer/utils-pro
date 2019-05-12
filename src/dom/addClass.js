@@ -18,6 +18,8 @@ function addClass(ele, cls) {
     // 现代浏览器
     // ele.classList.add(cls);
     // ele.setAttribute("class", ele.getAttribute("class").concat(" " + cls));
+  } else {
+    throw new Error("the class has already existed");
   }
 }
 
