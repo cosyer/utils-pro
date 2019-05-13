@@ -74,6 +74,21 @@ declare namespace rook {
 
   /**
    *
+   * @desc   字符串转html
+   * @param  {String} str 字符串
+   * @returns {HTMLElement} 兄弟节点的数组
+   */
+  export function str2Html(str: string): Array<HTMLElement>;
+
+  /**
+   * @description 简易双向绑定
+   * @param {Object} inputObj 输入的input
+   * @param {Object} outputObj 输出的input
+   */
+  export function viewModel(inputObj: Object, outputObj: Object): void;
+
+  /**
+   *
    * @desc 根据name读取cookie
    * @param  {String} name
    * @return {String}
