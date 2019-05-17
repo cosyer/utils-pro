@@ -28,26 +28,27 @@
         <article>
             <pre class="prettyprint source linenums"><code>/**
  * @desc   格式化${startTime}距现在的已过时间
- * @param  {Date} startTime 
+ * @param  {Date} startTime
  * @return {String}
  */
 function formatPassTime(startTime) {
-    var currentTime = Date.parse(new Date()),
-        time = currentTime - startTime,
-        day = parseInt(time / (1000 * 60 * 60 * 24)),
-        hour = parseInt(time / (1000 * 60 * 60)),
-        min = parseInt(time / (1000 * 60)),
-        month = parseInt(day / 30),
-        year = parseInt(month / 12);
-    if (year) return year + "年前"
-    if (month) return month + "个月前"
-    if (day) return day + "天前"
-    if (hour) return hour + "小时前"
-    if (min) return min + "分钟前"
-    else return '刚刚'
+  var currentTime = Date.parse(new Date()),
+    time = currentTime - startTime,
+    day = parseInt(time / (1000 * 60 * 60 * 24)),
+    hour = parseInt(time / (1000 * 60 * 60)),
+    min = parseInt(time / (1000 * 60)),
+    month = parseInt(day / 30),
+    year = parseInt(month / 12);
+  if (year) return year + "年前";
+  if (month) return month + "个月前";
+  if (day) return day + "天前";
+  if (hour) return hour + "小时前";
+  if (min) return min + "分钟前";
+  else return "刚刚";
 }
 
-module.exports = formatPassTime</code></pre>
+module.exports = formatPassTime;
+</code></pre>
         </article>
     </section>
 
@@ -57,13 +58,13 @@ module.exports = formatPassTime</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#arrayEqual">arrayEqual</a></li><li><a href="global.html#debounce">debounce</a></li><li><a href="global.html#deepClone">deepClone</a></li><li><a href="global.html#digitUppercase">digitUppercase</a></li><li><a href="global.html#formatPassTime">formatPassTime</a></li><li><a href="global.html#formatRemainTime">formatRemainTime</a></li><li><a href="global.html#getByStyle">getByStyle</a></li><li><a href="global.html#getCookie">getCookie</a></li><li><a href="global.html#getExplore">getExplore</a></li><li><a href="global.html#getKeyName">getKeyName</a></li><li><a href="global.html#getOS">getOS</a></li><li><a href="global.html#getScrollTop">getScrollTop</a></li><li><a href="global.html#hasClass">hasClass</a></li><li><a href="global.html#html2Str">html2Str</a></li><li><a href="global.html#isColor">isColor</a></li><li><a href="global.html#isEmail">isEmail</a></li><li><a href="global.html#isEmptyObject">isEmptyObject</a></li><li><a href="global.html#isIdCard">isIdCard</a></li><li><a href="global.html#isLeapYear">isLeapYear</a></li><li><a href="global.html#isPhoneNum">isPhoneNum</a></li><li><a href="global.html#isSameDay">isSameDay</a></li><li><a href="global.html#isSupportWebP">isSupportWebP</a></li><li><a href="global.html#isUrl">isUrl</a></li><li><a href="global.html#offset">offset</a></li><li><a href="global.html#parseQueryString">parseQueryString</a></li><li><a href="global.html#randomColor">randomColor</a></li><li><a href="global.html#randomNum">randomNum</a></li><li><a href="global.html#removeCookie">removeCookie</a></li><li><a href="global.html#scrollTo">scrollTo</a></li><li><a href="global.html#setCookie">setCookie</a></li><li><a href="global.html#setScrollTop">setScrollTop</a></li><li><a href="global.html#siblings">siblings</a></li><li><a href="global.html#stringfyQueryString">stringfyQueryString</a></li><li><a href="global.html#timeLeft">timeLeft</a></li><li><a href="global.html#windowResize">windowResize</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#arrayEqual">arrayEqual</a></li><li><a href="global.html#debounce">debounce</a></li><li><a href="global.html#deepClone">deepClone</a></li><li><a href="global.html#digitUppercase">digitUppercase</a></li><li><a href="global.html#formatPassTime">formatPassTime</a></li><li><a href="global.html#formatRemainTime">formatRemainTime</a></li><li><a href="global.html#getByStyle">getByStyle</a></li><li><a href="global.html#getCookie">getCookie</a></li><li><a href="global.html#getExplorer">getExplorer</a></li><li><a href="global.html#getKeyName">getKeyName</a></li><li><a href="global.html#getOS">getOS</a></li><li><a href="global.html#getScrollTop">getScrollTop</a></li><li><a href="global.html#hasClass">hasClass</a></li><li><a href="global.html#html2Str">html2Str</a></li><li><a href="global.html#isColor">isColor</a></li><li><a href="global.html#isEmail">isEmail</a></li><li><a href="global.html#isEmptyObject">isEmptyObject</a></li><li><a href="global.html#isIdCard">isIdCard</a></li><li><a href="global.html#isLeapYear">isLeapYear</a></li><li><a href="global.html#isPhoneNum">isPhoneNum</a></li><li><a href="global.html#isSameDay">isSameDay</a></li><li><a href="global.html#isSupportWebP">isSupportWebP</a></li><li><a href="global.html#isUrl">isUrl</a></li><li><a href="global.html#offset">offset</a></li><li><a href="global.html#parseQueryString">parseQueryString</a></li><li><a href="global.html#randomColor">randomColor</a></li><li><a href="global.html#randomNum">randomNum</a></li><li><a href="global.html#removeCookie">removeCookie</a></li><li><a href="global.html#scrollTo">scrollTo</a></li><li><a href="global.html#setCookie">setCookie</a></li><li><a href="global.html#setScrollTop">setScrollTop</a></li><li><a href="global.html#siblings">siblings</a></li><li><a href="global.html#str2Html">str2Html</a></li><li><a href="global.html#stringfyQueryString">stringfyQueryString</a></li><li><a href="global.html#timeLeft">timeLeft</a></li><li><a href="global.html#viewModel">viewModel</a></li><li><a href="global.html#windowResize">windowResize</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.1</a> on Mon May 13 2019 01:43:32 GMT+0800 (GMT+08:00)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.1</a> on Sat May 18 2019 00:21:40 GMT+0800 (GMT+08:00)
 </footer>
 
 <script> prettyPrint(); </script>

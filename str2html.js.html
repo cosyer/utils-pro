@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: parseQueryString.js</title>
+    <title>JSDoc: Source: str2html.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: parseQueryString.js</h1>
+    <h1 class="page-title">Source: str2html.js</h1>
 
     
 
@@ -28,30 +28,18 @@
         <article>
             <pre class="prettyprint source linenums"><code>/**
  *
- * @desc   url参数转对象
- * @param  {String} url  default: window.location.href
- * @return {Object}
+ * @desc   字符串转html
+ * @param  {String} str 字符串
+ * @returns {HTMLElement} 兄弟节点的数组
  */
-function parseQueryString(url) {
-  url = !url ? window.location.href : url;
-  if (url.indexOf("?") === -1) {
-    return {};
-  }
-  var search =
-    url[0] === "?" ? url.substr(1) : url.substring(url.lastIndexOf("?") + 1);
-  if (search === "") {
-    return {};
-  }
-  search = search.split("&amp;");
-  var query = {};
-  for (var i = 0; i &lt; search.length; i++) {
-    var pair = search[i].split("=");
-    query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || "");
-  }
-  return query;
+
+function str2Html(str) {
+  var temp = document.createElement("div");
+  temp.innerHTML = str;
+  return temp.children[0];
 }
 
-module.exports = parseQueryString;
+module.exports = str2Html;
 </code></pre>
         </article>
     </section>
