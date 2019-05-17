@@ -4,6 +4,7 @@
  * @param  {String} name
  * @return {String}
  */
+
 function getCookie(name) {
   var arr = document.cookie.replace(/\s/g, "").split(";");
   for (var i = 0; i < arr.length; i++) {
@@ -11,6 +12,16 @@ function getCookie(name) {
     if (tempArr[0] == name) {
       return decodeURIComponent(tempArr[1]);
     }
+  }
+  return "";
+}
+
+function getCookie2(name) {
+  var name = cname + "=";
+  var ca = document.cookie.split(";");
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i].trim();
+    if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
   }
   return "";
 }
