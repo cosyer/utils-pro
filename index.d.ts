@@ -116,7 +116,7 @@ declare namespace rook {
    * @desc 获取浏览器类型和版本
    * @return {String}
    */
-  export function getExplore(): string;
+  export function getExplorer(): string;
 
   /**
    *

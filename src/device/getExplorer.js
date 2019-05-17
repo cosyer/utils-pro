@@ -3,7 +3,7 @@
  * @desc 获取浏览器类型和版本
  * @return {String}
  */
-function getExplore() {
+function getExplorer() {
   var sys = {},
     ua = navigator.userAgent.toLowerCase(),
     s;
