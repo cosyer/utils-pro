@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: addClass.js</title>
+    <title>JSDoc: Source: isFunction.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: addClass.js</h1>
+    <h1 class="page-title">Source: isFunction.js</h1>
 
     
 
@@ -27,31 +27,16 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- *
- * @desc   为元素添加class
- * @param  {HTMLElement} ele HTMl元素
- * @param  {String} cls 类名
+ * @desc   判断是否为函数
+ * @param  {*} value
+ * @return {Boolean}
  */
 
-var hasClass = require("./hasClass");
-
-function addClass(ele, cls) {
-  if (!hasClass(ele, cls)) {
-    // 兼容写法
-    if (ele.className === "" || ele.classList.length === 0) {
-      ele.className = cls;
-    } else {
-      ele.className += " " + cls;
-    }
-    // 现代浏览器
-    // ele.classList.add(cls);
-    // ele.setAttribute("class", ele.getAttribute("class").concat(" " + cls));
-  } else {
-    throw new Error("the class has already existed");
-  }
+function isFunction(value) {
+  return Object.prototype.toString.call(value).slice(8, -1) === "Function";
 }
 
-module.exports = addClass;
+module.exports = isFunction;
 </code></pre>
         </article>
     </section>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: addClass.js</title>
+    <title>JSDoc: Source: isFalse.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: addClass.js</h1>
+    <h1 class="page-title">Source: isFalse.js</h1>
 
     
 
@@ -27,31 +27,27 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- *
- * @desc   为元素添加class
- * @param  {HTMLElement} ele HTMl元素
- * @param  {String} cls 类名
+ * @desc   判断是否为假值
+ * @param  {*} o
+ * @return {Boolean}
  */
 
-var hasClass = require("./hasClass");
-
-function addClass(ele, cls) {
-  if (!hasClass(ele, cls)) {
-    // 兼容写法
-    if (ele.className === "" || ele.classList.length === 0) {
-      ele.className = cls;
-    } else {
-      ele.className += " " + cls;
-    }
-    // 现代浏览器
-    // ele.classList.add(cls);
-    // ele.setAttribute("class", ele.getAttribute("class").concat(" " + cls));
-  } else {
-    throw new Error("the class has already existed");
-  }
+function isFalse(o) {
+  if (
+    o == "" ||
+    o == undefined ||
+    o == null ||
+    o == "null" ||
+    o == "undefined" ||
+    o == 0 ||
+    o == false ||
+    o == NaN
+  )
+    return true;
+  return false;
 }
 
-module.exports = addClass;
+module.exports = isFalse;
 </code></pre>
         </article>
     </section>
