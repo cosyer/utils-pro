@@ -123,7 +123,91 @@ declare namespace rook {
    * @desc 获取操作系统类型
    * @return {String}
    */
-  export function getOS(): void;
+  export function getOS(): string;
+
+  /**
+   *
+   * @desc 判断是否为PC端
+   * @return {Boolean}
+   */
+  export function isPC(): boolean;
+
+  /**
+   *
+   * @desc 判断是否为数组
+   * @return {Boolean}
+   */
+  export function isArray(): boolean;
+
+  /**
+   *
+   * @desc 判断是否为布尔类型
+   * @return {Boolean}
+   */
+  export function isBoolean(): boolean;
+
+  /**
+   *
+   * @desc 判断是否为日期类型
+   * @return {Boolean}
+   */
+  export function isDate(): boolean;
+
+  /**
+   *
+   * @desc 判断是否为假值
+   * @return {Boolean}
+   */
+  export function isFalse(): boolean;
+
+  /**
+   *
+   * @desc 判断是否为函数
+   * @return {Boolean}
+   */
+  export function isFunction(): boolean;
+
+  /**
+   *
+   * @desc 判断是否为null
+   * @return {Boolean}
+   */
+  export function isNull(): boolean;
+
+  /**
+   *
+   * @desc 判断是否为数字类型
+   * @return {Boolean}
+   */
+  export function isNumber(): boolean;
+
+  /**
+   *
+   * @desc 判断是否为对象
+   * @return {Boolean}
+   */
+  export function isObj(): boolean;
+
+  /**
+   *
+   * @desc 判断是否为字符串类型
+   * @return {Boolean}
+   */
+  export function isString(): boolean;
+
+  /**
+   *
+   * @desc 判断是否为真值
+   * @return {Boolean}
+   */
+  export function isTrue(): boolean;
+
+  /**
+   *
+   * @desc 判断是否为undefined
+   * @return {Boolean}
+   */
+  export function isUndefined(): boolean;
 
   /**
    *
