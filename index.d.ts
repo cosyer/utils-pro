@@ -113,6 +113,14 @@ declare namespace rook {
 
   /**
    *
+   * @desc   将阿拉伯数字翻译成中文的大写数字
+   * @param  {Number} num 数字
+   * @param  {String} str 类名
+   */
+  export function numToChinese(num: number): string;
+
+  /**
+   *
    * @desc 获取浏览器类型和版本
    * @return {String}
    */
