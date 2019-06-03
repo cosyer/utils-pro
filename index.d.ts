@@ -142,6 +142,20 @@ declare namespace rook {
 
   /**
    *
+   * @desc 判断是否为微信浏览器
+   * @return {Boolean}
+   */
+  export function isWechat(): boolean;
+
+  /**
+   *
+   * @desc 判断是否微信小程序
+   * @return {Boolean}
+   */
+  export function isMiniProgram(): boolean;
+
+  /**
+   *
    * @desc 判断是否为数组
    * @return {Boolean}
    */
