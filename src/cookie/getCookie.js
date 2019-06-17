@@ -1,4 +1,5 @@
 /**
+import { getCookie } from '../../index.d';
  *
  * @desc 根据name读取cookie
  * @param  {String} name
@@ -24,6 +25,11 @@ function getCookie2(name) {
     if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
   }
   return "";
+}
+
+function getCookie3(name) {
+  let v = window.document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
+  return v ? v[2] : null;
 }
 
 module.exports = getCookie;
