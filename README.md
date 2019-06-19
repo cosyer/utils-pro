@@ -48,6 +48,10 @@ import deviceUtils from 'utils-pro';
 
 不需要完整引入所有函数，只引入需要使用的方法即可。
 
+- v1.1.0 变更不采用扁平化结构 
+    - 扁平化结构请参考 flat 分支。
+    - [扁平化结构api文档](https://cosyer.github.io/utils-pro/)
+
 to do
 
 - [ ] travis-ci持续集成
