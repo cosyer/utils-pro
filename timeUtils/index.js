@@ -62,21 +62,11 @@ function isLeapYear(year) {
  * @param  {Date} date2 可选／默认值：当天
  * @return {Boolean}
  */
-function isSameDay(date1, date2) {
-  if (!date2) {
-    date2 = new Date();
-  }
-  var date1_year = date1.getFullYear(),
-    date1_month = date1.getMonth() + 1,
-    date1_date = date1.getDate();
-  var date2_year = date2.getFullYear(),
-    date2_month = date2.getMonth() + 1,
-    date2_date = date2.getDate();
-
+function isSameDay(a, b) {
   return (
-    date1_date === date2_date &&
-    date1_month === date2_month &&
-    date1_year === date2_year
+    a.getFullYear() === b.getFullYear() &&
+    a.getMonth() === b.getMonth() &&
+    a.getDate() === b.getDate()
   );
 }
 
@@ -115,10 +105,84 @@ function timeLeft(startTime, endTime) {
   return { d, h, m, s };
 }
 
+/**
+ * @desc   日期格式转化
+ * @param  {String} dateStr "2019/6/20"
+ * @return {String} "2019-6-20"
+ */
+function skew2Horizontal(dateStr) {
+  return new Date(dateStr).toLocaleDateString().replace(/\//g, "-");
+}
+
+/**
+ * @desc   已知年月求当月多少天
+ * @param  {Number} year
+ * @param  {Number} month
+ * @return {Number}
+ */
+// Date API 处理日期溢出时，会自动往后推延响应时间
+function getMonthCountDay(year, month) {
+  return 32 - new Date(year, month - 1, 32).getDate();
+  // 32 - (32-当月天数) = 当月天数
+  // return new Date(year, month , 0).getDate();
+}
+
+/**
+ * @desc   Date扩展
+ */
+function dateExtend() {
+  Date.prototype.format = function(format) {
+    var o = {
+      "M+": this.getMonth() + 1,
+      "d+": this.getDate(),
+      "h+": this.getHours(),
+      "m+": this.getMinutes(),
+      "s+": this.getSeconds(),
+      "q+": Math.floor((this.getMonth() + 3) / 3),
+      S: this.getMilliseconds()
+    };
+    if (/(y+)/.test(format)) {
+      format = format.replace(
+        RegExp.$1,
+        (this.getFullYear() + "").substr(4 - RegExp.$1.length)
+      );
+    }
+    for (var k in o) {
+      if (new RegExp("(" + k + ")").test(format)) {
+        format = format.replace(
+          RegExp.$1,
+          RegExp.$1.length == 1
+            ? o[k]
+            : ("00" + o[k]).substr(("" + o[k]).length)
+        );
+      }
+    }
+    return format;
+  };
+
+  Date.prototype.addDays = function(d) {
+    this.setDate(this.getDate() + d);
+  };
+
+  Date.prototype.addWeeks = function(w) {
+    this.addDays(w * 7);
+  };
+
+  Date.prototype.addMonths = function(m) {
+    var d = this.getDate();
+    this.setMonth(this.getMonth() + m);
+    //if (this.getDate() < d)
+    //  this.setDate(0);
+  };
+}
+
 module.exports = {
   formatPassTime,
   formatRemainTime,
   isLeapYear,
   isSameDay,
-  timeLeft
+  timeLeft,
+  skew2Horizontal,
+  getMonthCountDay,
+  dateExtend
 };
