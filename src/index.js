@@ -25,6 +25,7 @@ const timeUtils = require("../timeUtils");
 const typeUtils = require("../typeUtils");
 const urlUtils = require("../urlUtils");
 const windowUtils = require("../windowUtils");
+const localStorageUtils = require("../localStorageUtils");
 
 module.exports = {
   arrayUtils,
@@ -41,5 +42,6 @@ module.exports = {
   timeUtils,
   typeUtils,
   urlUtils,
-  windowUtils
+  windowUtils,
+  localStorageUtils
 };
