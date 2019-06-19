@@ -1,18 +1,14 @@
 {
   "name": "utils-pro",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "一些常用的 JavaScript 工具函数",
   "main": "dist/rook.min.js",
   "types": "index.d.ts",
   "scripts": {
-    "build": "node script/build.js",
-    "build-copy": "node script/build-copy.js",
-    "build-pack": "node script/build-pack",
-    "build-doc": "node script/build-copy;jsdoc ./lib"
+    "build": "node script/build.js"
   },
   "files": [
     "index.d.ts",
-    "lib",
     "dist",
     "LICENSE",
     "README.md"
@@ -35,7 +31,6 @@
     "chalk": "^2.4.1",
     "copy": "^0.3.2",
     "coveralls": "^3.0.2",
-    "jsdoc": "^3.6.1",
     "karma": "^2.0.4",
     "karma-chrome-launcher": "^2.2.0",
     "karma-coverage": "^1.1.2",

@@ -11,7 +11,7 @@
 ```js
 <script type="text/javascript" src="rook.min.js"></script>
 <script>
-    var OS = rook.getOS();
+    var OS = rook.deviceUtils.getOS();
 </script>
 ```
 2. **npm 安装**
@@ -22,29 +22,33 @@ npm install utils-pro -S
 通过es6的import语法
 ```js
 import rook from 'utils-pro';
-import { getOS } from 'utils-pro';
-import getOS from 'utils-pro/lib/getOS';
+rook.deviceUtils.getOS();
+
+import deviceUtils from 'utils-pro';
+deviceUtils.getOS();
+
+import { getOS } from 'utils-pro/deviceUtils';
+getOS();
 ```
 
 通过commonjs规范引入
 ```js
 const rook =  require('utils-pro');
-const { getOS } = require("utils-pro");
-const getOS = require('utils-pro/lib/getOS');
+
+const deviceUtils = require('utils-pro/');
+
+const { getOS } = require("utils-pro/deviceUtils");
 ```
 
 > 推荐使用方法
 ```js
-import { getOS } from 'utils-pro';
-import getOS from 'utils-pro/lib/getOS';
+import { getOS } from 'utils-pro/deviceUtils';
+import deviceUtils from 'utils-pro';
 ```
 
 不需要完整引入所有函数，只引入需要使用的方法即可。
-
-[API文档](https://cosyer.github.io/utils-pro/)
 
 to do
 
 - [ ] travis-ci持续集成
 - [ ] 测试用例/覆盖率
-- [x] [接口文档(jsdoc)](https://cosyer.github.io/utils-pro/)

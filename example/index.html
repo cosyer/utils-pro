@@ -28,15 +28,19 @@
     </div>
     <script src="../dist/rook.min.js"></script>
     <script>
+      console.log(rook);
       var container = document.querySelector(".container");
-      console.log("存在container属性", rook.hasClass(container, "container"));
-      rook.addClass(container, "main");
-      // rook.removeClass(container, "main");
-      rook.replaceClass(container, "main", "mainer");
+      console.log(
+        "存在container属性",
+        rook.domUtils.hasClass(container, "container")
+      );
+      rook.domUtils.addClass(container, "main");
+      // rook.domUtils.removeClass(container, "main");
+      rook.domUtils.replaceClass(container, "main", "mainer");
       var part1 = document.querySelector(".part1");
-      console.log(rook.siblings(part1));
-      console.log(rook.getByStyle(container, "border-radius"));
-      console.log(rook.isString("2323"));
+      console.log(rook.domUtils.siblings(part1));
+      console.log(rook.domUtils.getByStyle(container, "border-radius"));
+      console.log(rook.typeUtils.isString("2323"));
     </script>
   </body>
 </html>
