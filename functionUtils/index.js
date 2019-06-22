@@ -114,7 +114,7 @@ function throttle(delay, noTrailing, callback, debounceMode) {
  */
 
 function chalkPrint(str, colorStyle) {
-  str = toString(str) || "";
+  str = String(str) || "";
   console.log("%c" + str, `font-weight: bold; color: ${colorStyle}`);
 }
 

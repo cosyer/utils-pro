@@ -4,6 +4,7 @@
  * @param  {String} url  default: window.location.href
  * @return {Object}
  */
+// 核心：split
 function parseQueryString(url) {
   url = !url ? window.location.href : url;
   if (url.indexOf("?") === -1) {
@@ -23,10 +24,38 @@ function parseQueryString(url) {
   return query;
 }
 
+// 核心：正则 better
+function getQueryStringObject(url) {
+  url = !url ? window.location.href : url;
+  var reg = /([^?&=]+)=([^&]+)/g;
+  var q = {};
+  location.search.replace(
+    reg,
+    (m, k, v) => (q[decodeURIComponent(k)] = decodeURIComponent(v))
+  );
+  return q;
+}
+
+/**
+ *
+ * @desc   url获取指定参数
+ * @param  {String} name
+ * @return {*}
+ */
+function getQueryString(name) {
+  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+  var r = window.location.search.substr(1).match(reg);
+  if (r != null) {
+    // return unescape(r[2]); // 中文会乱码
+    return decodeURI(r[2]);
+  }
+  return null;
+}
+
 /**
  *
  * @desc   对象序列化
- * @param  {Object} obj
+ * @param  {Object} obj {name:'cosyer',age:25} => name=cosyer&age=25
  * @return {String}
  */
 function stringfyQueryString(obj) {
@@ -53,4 +82,9 @@ function stringfyQueryString(obj) {
   return pairs.join("&");
 }
 
-module.exports = { parseQueryString, stringfyQueryString };
+module.exports = {
+  parseQueryString,
+  getQueryStringObject,
+  getQueryString,
+  stringfyQueryString
+};

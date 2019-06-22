@@ -1,5 +1,4 @@
 /**
- *
  * @desc   现金额转大写
  * @param  {Number} n
  * @return {String}
@@ -35,4 +34,51 @@ function digitUppercase(n) {
   );
 }
 
-module.exports = { digitUppercase };
+/**
+ * @desc   截取字符串 剩余部分用...代替
+ * @param  {String} str 字符串
+ * @return {Number} len 截取长度
+ */
+function subStrWithEllpsis(str, len) {
+  var length = str.length;
+  var result = str.substr(0, len);
+  if (len < length) {
+    return result + "...";
+  } else {
+    return result;
+  }
+}
+
+/**
+ * @desc unicode字符串base64编码
+ * @param {String} str
+ */
+function b64EncodeUnicode(str) {
+  return btoa(
+    encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (match, p1) => {
+      return String.fromCharCode("0x" + p1);
+    })
+  );
+}
+
+/**
+ * @desc unicode字符串base64解码
+ * @param {String} str
+ */
+function b64DecodeUnicode(str) {
+  return decodeURIComponent(
+    atob(str)
+      .split("")
+      .map(c => {
+        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join("")
+  );
+}
+
+module.exports = {
+  digitUppercase,
+  subStrWithEllpsis,
+  b64EncodeUnicode,
+  b64DecodeUnicode
+};
