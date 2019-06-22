@@ -5,6 +5,10 @@
  */
 
 function isArray(value) {
+  // es6判断
+  if (Array.isArray) {
+    return Array.isArray(value);
+  }
   return Object.prototype.toString.call(value).slice(8, -1) === "Array";
 }
 

@@ -106,4 +106,16 @@ function throttle(delay, noTrailing, callback, debounceMode) {
   return wrapper;
 }
 
-module.exports = { debounce, throttle };
+/**
+ *
+ * @desc 彩色控制台
+ * @param {String} str
+ * @param {String} colorStyle
+ */
+
+function chalkPrint(str, colorStyle) {
+  str = toString(str) || "";
+  console.log("%c" + str, `font-weight: bold; color: ${colorStyle}`);
+}
+
+module.exports = { debounce, throttle, chalkPrint };

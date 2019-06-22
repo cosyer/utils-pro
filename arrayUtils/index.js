@@ -5,7 +5,7 @@
  * @param {Array} arr2 数组2
  * @return {Boolean}
  */
-function arrayEqual(arr1, arr2) {
+function arrEqual(arr1, arr2) {
   // the same array
   if (arr1 === arr2) return true;
   // compare lengths - can save a lot of time
@@ -16,4 +16,4 @@ function arrayEqual(arr1, arr2) {
   return true;
 }
 
-module.exports = { arrayEqual };
+module.exports = { arrEqual };
