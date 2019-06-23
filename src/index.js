@@ -27,6 +27,7 @@ const urlUtils = require("../urlUtils");
 const windowUtils = require("../windowUtils");
 const localStorageUtils = require("../localStorageUtils");
 const magicUtils = require("../magicUtils");
+const uuidUtils = require("../uuidUtils");
 
 module.exports = {
   arrayUtils,
@@ -45,5 +46,6 @@ module.exports = {
   urlUtils,
   windowUtils,
   localStorageUtils,
-  magicUtils
+  magicUtils,
+  uuidUtils
 };
