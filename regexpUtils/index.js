@@ -60,7 +60,6 @@ function isUrl(str) {
  * @param  {Number} num
  * @return {String}
  */
-
 function numToChinese(num) {
   var AA = new Array(
     "零",
@@ -110,11 +109,22 @@ function numToChinese(num) {
   return re;
 }
 
+/**
+ *
+ * @desc   判断是否是质数
+ * @param  {Number} n
+ * @return {String}
+ */
+function isPrime(n) {
+  return !/^.?$|^(..+?)\1+$/.test("1".repeat(n));
+}
+
 module.exports = {
   isColor,
   isEmail,
   isIdCard,
   isPhoneNum,
   isUrl,
-  numToChinese
+  numToChinese,
+  isPrime
 };
