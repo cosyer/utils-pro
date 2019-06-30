@@ -1,11 +1,12 @@
 {
   "name": "utils-pro",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "一些常用的 JavaScript 工具函数",
   "main": "dist/rook.min.js",
   "types": "index.d.ts",
   "scripts": {
-    "build": "node script/build.js"
+    "build": "node script/build.js",
+    "test": "karma start script/karma.conf.js"
   },
   "files": [
     "arrayUtils",

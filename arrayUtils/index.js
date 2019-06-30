@@ -39,6 +39,7 @@ function max(arr) {
   for (let i = 0; i < arr.length - 1; i++) {
     max = max < arr[i + 1] ? arr[i + 1] : max;
   }
+  return max;
 }
 
 /**
