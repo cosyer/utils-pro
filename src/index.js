@@ -21,7 +21,7 @@ const randomUtils = require("../randomUtils");
 const regexpUtils = require("../regexpUtils");
 const stringUtils = require("../stringUtils");
 const supportUtils = require("../supportUtils");
-const timeUtils = require("../timeUtils");
+const dateUtils = require("../dateUtils");
 const typeUtils = require("../typeUtils");
 const urlUtils = require("../urlUtils");
 const windowUtils = require("../windowUtils");
@@ -41,7 +41,7 @@ module.exports = {
   regexpUtils,
   stringUtils,
   supportUtils,
-  timeUtils,
+  dateUtils,
   typeUtils,
   urlUtils,
   windowUtils,

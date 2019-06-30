@@ -11,6 +11,19 @@ function getScrollTop() {
 
 /**
  *
+ * @desc 获取滚动条位置
+ * @returns {Object}
+ */
+function getScrollPos() {
+  return {
+    x:
+      window.pageXOffset !== undefined ? window.pageXOffset : window.scrollLeft,
+    y: window.pageYOffset !== undefined ? window.pageYOffset : window.scrollTop
+  };
+}
+
+/**
+ *
  * @desc  获取一个元素的距离文档(document)的位置，类似jQ中的offset()
  * @param {HTMLElement} ele
  * @returns { {left: number, top: number} }
@@ -28,16 +41,6 @@ function offset(ele) {
   return pos;
 }
 
-var requestAnimFrame = (function() {
-  return (
-    window.requestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    window.mozRequestAnimationFrame ||
-    function(callback) {
-      window.setTimeout(callback, 1000 / 60);
-    }
-  );
-})();
 /**
  *
  * @desc  在${duration}时间内，滚动条平滑滚动到${to}指定位置
@@ -45,6 +48,16 @@ var requestAnimFrame = (function() {
  * @param {Number} duration
  */
 function scrollTo(to, duration) {
+  var requestAnimFrame = (function() {
+    return (
+      window.requestAnimationFrame ||
+      window.webkitRequestAnimationFrame ||
+      window.mozRequestAnimationFrame ||
+      function(callback) {
+        window.setTimeout(callback, 1000 / 60);
+      }
+    );
+  })();
   if (duration < 0) {
     setScrollTop(to);
     return;
@@ -101,4 +114,120 @@ function windowResize(downCb, upCb) {
   });
 }
 
-module.exports = { getScrollTop, offset, scrollTo, setScrollTop, windowResize };
+/**
+ * @desc 回到顶部
+ */
+function goTop() {
+  var iScrollTop =
+    document.body.scrollTop || document.documentElement.scrollTop;
+  var timer = setInterval(function() {
+    //定时器
+    scrollTo(0, (iScrollTop -= 100));
+    if (iScrollTop <= 0) {
+      clearInterval(timer); //清除定时器
+    }
+  }, 100);
+  // 设置滚动行为改为平滑的滚动
+  // window.scrollTo({
+  //   top: 1000,
+  //   behavior: "smooth"
+  // });
+
+  // var c = document.documentElement.scrollTop || document.body.scrollTop;
+  // if (c > 0) {
+  // ​ window.requestAnimationFrame(scrollToTop);
+  // ​ window.scrollTo(0, c - c / 8);
+  // }
+}
+
+/**
+ * @desc 获取鼠标位置
+ * @returns {Object}
+ */
+function getCoordInDocument() {
+  e = e || window.event;
+  var x =
+    e.pageX ||
+    e.clientX +
+      (document.documentElement.scrollLeft || document.body.scrollLeft);
+  var y =
+    e.pageY ||
+    e.clientY + (document.documentElement.scrollTop || document.body.scrollTop);
+  return {
+    x: x,
+    y: y
+  };
+}
+
+/**
+ * @desc 禁止鼠标滚动
+ */
+function disableScroll() {
+  var keys = [37, 38, 39, 40];
+
+  function preventDefault(e) {
+    e = e || window.event;
+    if (e.preventDefault) e.preventDefault();
+    e.returnValue = false;
+  }
+
+  function keydown(e) {
+    for (var i = keys.length; i--; ) {
+      if (e.keyCode === keys[i]) {
+        preventDefault(e);
+        return;
+      }
+    }
+  }
+
+  function wheel(e) {
+    preventDefault(e);
+  }
+
+  function disable_scroll() {
+    if (window.addEventListener) {
+      window.addEventListener("DOMMouseScroll", wheel, false);
+    }
+    window.onmousewheel = document.onmousewheel = wheel;
+    document.onkeydown = keydown;
+  }
+  disable_scroll();
+}
+
+/**
+ * @desc 允许鼠标滚动
+ */
+function enableScroll() {
+  var keys = [37, 38, 39, 40];
+
+  function preventDefault(e) {
+    e = e || window.event;
+    if (e.preventDefault) e.preventDefault();
+    e.returnValue = false;
+  }
+
+  function wheel(e) {
+    preventDefault(e);
+  }
+
+  function enable_scroll() {
+    if (window.removeEventListener) {
+      window.removeEventListener("DOMMouseScroll", wheel, false);
+    }
+    window.onmousewheel = document.onmousewheel = document.onkeydown = null;
+  }
+  enable_scroll();
+}
+
+module.exports = {
+  getScrollTop,
+  offset,
+  scrollTo,
+  setScrollTop,
+  windowResize,
+  goTop,
+  getScrollPos,
+  getCoordInDocument,
+  disableScroll,
+  enableScroll
+};

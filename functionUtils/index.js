@@ -118,4 +118,217 @@ function chalkPrint(str, colorStyle) {
   console.log("%c" + str, `font-weight: bold; color: ${colorStyle}`);
 }
 
-module.exports = { debounce, throttle, chalkPrint };
+/**
+ * @desc toFixed扩展
+ */
+function toFixedExtend() {
+  // 直接替换原型链上的方法，方便使用
+  Number.prototype.toFixed = function(n) {
+    // n为期望保留的位数，超过限定，报错！
+    if (n > 20 || n < 0) {
+      throw new RangeError(
+        "toFixed() digits argument must be between 0 and 20"
+      );
+    }
+    // 获取数字
+    const number = this;
+    // 如果是NaN,或者数字过大，直接返回'NaN'或者类似'1e+21'的科学计数法字符串
+    if (isNaN(number) || number >= Math.pow(10, 21)) {
+      return number.toString();
+    }
+    // 默认保留整数
+    if (typeof n == "undefined" || n == 0) {
+      return Math.round(number).toString();
+    }
+
+    // 先获取字符串
+    let result = number.toString();
+    // 获取小数部分
+    const arr = result.split(".");
+
+    // 整数的情况，直接在后面加上对应个数的0即可
+    if (arr.length < 2) {
+      result += ".";
+      for (let i = 0; i < n; i += 1) {
+        result += "0";
+      }
+      return result;
+    }
+
+    // 整数和小数
+    const integer = arr[0];
+    const decimal = arr[1];
+    // 如果已经符合要求位数，直接返回
+    if (decimal.length == n) {
+      return result;
+    }
+    // 如果小于指定的位数，补上
+    if (decimal.length < n) {
+      for (let i = 0; i < n - decimal.length; i += 1) {
+        result += "0";
+      }
+      return result;
+    }
+    // 如果到这里还没结束，说明原有小数位多于指定的n位
+    // 先直接截取对应的位数
+    result = integer + "." + decimal.substr(0, n);
+    // 获取后面的一位
+    const last = decimal.substr(n, 1);
+    if (/^\d(9){5,}[89]$/.test(decimal.substr(n))) {
+      last = +last + 1;
+    }
+    // 大于等于5统一进一位
+    if (parseInt(last, 10) >= 5) {
+      // 转换倍数，转换为整数后，再进行四舍五入
+      const x = Math.pow(10, n);
+      // 进一位后，转化还原为小数
+      result = (Math.round(parseFloat(result) * x) + 1) / x;
+      // 再确认一遍
+      result = result.toFixed(n);
+    }
+    return result;
+  };
+}
+
+/**
+ * @desc 求最大公约数
+ * @param {Number} x
+ * @param {Number} y
+ * @returns {Number}
+ */
+function gcd(x, y) {
+  return !y ? x : gcd(y, x % y);
+}
+
+/**
+ * @desc 阶乘
+ * @param {Number} n
+ * @returns {Number}
+ */
+function factorial(num) {
+  if (num <= 1) {
+    return 1;
+  } else {
+    return num * factorial(num - 1);
+  }
+}
+
+/**
+ * @desc RGB到十六进制
+ * @param {Number} r
+ * @param {Number} g
+ * @param {Number} b
+ * @returns {String}
+ */
+function rgbToHex(r, g, b) {
+  // ((1<<24) + (rgb.r<<16) + (rgb.g<<8) + rgb.b).toString(16).substr(1);
+  return ((r << 16) + (g << 8) + b).toString(16).padStart(6, "0");
+}
+
+/**
+ * @desc 判断奇数
+ * @param {Number} n
+ * @returns {Boolean}
+ */
+function isOdd(n) {
+  return n % 2 === 1;
+}
+
+/**
+ * @desc 判断偶数
+ * @param {Number} n
+ * @returns {Boolean}
+ */
+function isEven(n) {
+  return n % 2 === 0;
+}
+
+/**
+ * @desc 复制到粘贴板
+ * @param {String} str
+ */
+function copy(str) {
+  if (window.clipboardData) {
+    // 兼容ie11以下浏览器
+    window.clipboardData.setData("Text", str);
+  } else {
+    var $input = document.createElement("input");
+    var body = document.querySelector("body");
+    $input.value = str;
+    body.appendChild($input);
+    $input.select();
+    document.execCommand("copy");
+    // $input.remove();
+    body.remove($input);
+  }
+}
+
+/**
+ * @desc 复制添加版权信息
+ */
+function copyWithCopyRight() {
+  if (window.clipboardData) {
+    // IE
+    document.body.oncopy = function() {
+      event.returnValue = false;
+      var t = document.selection.createRange().text;
+      var s = " 原文链接：" + location.href;
+      clipboardData.setData("Text", t + "\r\n" + s);
+    };
+  } else {
+    function addLink() {
+      var body_element = document.getElementsByTagName("body")[0];
+      var selection;
+      selection = window.getSelection();
+      var pagelink = " 原文链接：" + location.href;
+      var copytext = selection + pagelink;
+
+      var newdiv = document.createElement("div");
+      newdiv.style.position = "absolute";
+      newdiv.style.left = "-99999px";
+      body_element.appendChild(newdiv);
+      newdiv.innerHTML = copytext;
+      selection.selectAllChildren(newdiv);
+      window.setTimeout(function() {
+        body_element.removeChild(newdiv);
+      }, 0);
+    }
+    document.oncopy = addLink;
+  }
+}
+
+/**
+ * @desc 前端生成并下载文件
+ * @param {String} fileName
+ * @param {String} filePath
+ */
+function createAndDownloadFile(fileName, filePath) {
+  // 创建隐藏的可下载链接
+  var eleLink = document.createElement("a");
+  eleLink.download = filename;
+  eleLink.style.display = "none";
+  // 字符内容转变成blob地址
+  var blob = new Blob([fileName]);
+  eleLink.href = URL.createObjectURL(blob);
+  // 触发点击
+  document.body.appendChild(eleLink);
+  eleLink.click();
+  // 然后移除
+  // URL.revokeObjectURL(blob);
+  document.body.removeChild(eleLink);
+}
+
+module.exports = {
+  debounce,
+  throttle,
+  chalkPrint,
+  toFixedExtend,
+  gcd,
+  factorial,
+  rgbToHex,
+  isOdd,
+  isEven,
+  copy,
+  copyWithCopyRight,
+  createAndDownloadFile
+};

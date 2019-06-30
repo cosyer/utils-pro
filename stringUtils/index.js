@@ -1,7 +1,7 @@
 /**
  * @desc   现金额转大写
  * @param  {Number} n
- * @return {String}
+ * @returns {String}
  */
 function digitUppercase(n) {
   var fraction = ["角", "分"];
@@ -37,7 +37,8 @@ function digitUppercase(n) {
 /**
  * @desc   截取字符串 剩余部分用...代替
  * @param  {String} str 字符串
- * @return {Number} len 截取长度
+ * @param {Number} len 截取长度
+ * @returns {String}
  */
 function subStrWithEllpsis(str, len) {
   var length = str.length;
@@ -52,6 +53,7 @@ function subStrWithEllpsis(str, len) {
 /**
  * @desc unicode字符串base64编码
  * @param {String} str
+ * @returns {String}
  */
 function b64EncodeUnicode(str) {
   return btoa(
@@ -64,6 +66,7 @@ function b64EncodeUnicode(str) {
 /**
  * @desc unicode字符串base64解码
  * @param {String} str
+ * @returns {String}
  */
 function b64DecodeUnicode(str) {
   return decodeURIComponent(
@@ -76,9 +79,92 @@ function b64DecodeUnicode(str) {
   );
 }
 
+/**
+ * @desc 连字符转驼峰
+ * @param {String} str
+ * @returns {String}
+ */
+function hyphenToHump(str) {
+  return str.replace(/-(\w)/g, function() {
+    return arguments[1].toUpperCase();
+  });
+}
+
+/**
+ * @desc 驼峰转连字符
+ * @param {String} str
+ * @returns {String}
+ */
+function humpToHyphen(str) {
+  return this.replace(/([A-Z])/g, "-$1").toLowerCase();
+}
+
+/**
+ * @desc 判断一个字符在字符串中的个数
+ * @param {String} str
+ * @param {String} c
+ * @returns {Number}
+ */
+function getNumInStr(str, c) {
+  return str.split(c).length - 1;
+}
+
+/**
+ * @desc 手机号处理中间4位替换成
+ * @param {String} str
+ * @returns {String}
+ */
+function replacePhone(phone) {
+  // 正则
+  // let reg = /^(\d{3})\d{4}(\d{4})$/;
+  // return phone.replace(reg, "$1****$2");
+  return phone.substr(0, 3) + "****" + phone.substr(7);
+}
+
+/**
+ * @desc 大写每个单词的首字母
+ * @param {String} str
+ * @returns {String}
+ */
+function titleCase(str) {
+  return s.toLowerCase().replace(/\b([\w|']+)\b/g, function(word) {
+    //return word.slice(0, 1).toUpperCase() + word.slice(1);
+    return word.replace(word.charAt(0), word.charAt(0).toUpperCase());
+  });
+}
+
+/**
+ * @desc 获取文件扩展名
+ * @param {String} str
+ * @returns {String}
+ */
+function getFileExtension(fileName) {
+  return fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length);
+}
+
+/**
+ * @desc 字符串反转
+ * @param {String} str
+ * @returns {String}
+ */
+function reverse(str) {
+  // (str === '') ? '' : reverse(str.substr(1)) + str.charAt(0);
+  return str
+    .split()
+    .reverse()
+    .join();
+}
+
 module.exports = {
   digitUppercase,
   subStrWithEllpsis,
   b64EncodeUnicode,
-  b64DecodeUnicode
+  b64DecodeUnicode,
+  hyphenToHump,
+  humpToHyphen,
+  getNumInStr,
+  replacePhone,
+  titleCase,
+  getFileExtension,
+  reverse
 };

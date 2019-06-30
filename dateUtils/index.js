@@ -111,6 +111,13 @@ function timeLeft(startTime, endTime) {
  * @return {String} "2019-6-20"
  */
 function skew2Horizontal(dateStr) {
+  // let date = new Date();
+  // let arr = date.toLocaleDateString().split("/");
+  // arr = arr.map(item => {
+  //   return parseInt(item) < 10 ? "0" + item : item;
+  // });
+  // let dateStr = arr.join("-");
+  // return dateStr;
   return new Date(dateStr).toLocaleDateString().replace(/\//g, "-");
 }
 
