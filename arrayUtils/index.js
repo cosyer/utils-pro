@@ -72,7 +72,7 @@ function sum(arr) {
  * @param {Number} value
  * @returns {Number}
  */
-function countOccurrences(arr, value) {
+function count(arr, value) {
   return arr.reduce((a, v) => (v === value ? a + 1 : a + 0), 0);
 }
 
@@ -135,7 +135,7 @@ module.exports = {
   max,
   min,
   sum,
-  countOccurrences,
+  count,
   arguments2Arr,
   contains,
   unique,
