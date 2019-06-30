@@ -5,7 +5,7 @@
  * @param {Array} arr2 数组2
  * @returns {Boolean}
  */
-function arrEqual(arr1, arr2) {
+function equal(arr1, arr2) {
   // the same array
   if (arr1 === arr2) return true;
   // compare lengths - can save a lot of time
@@ -21,7 +21,7 @@ function arrEqual(arr1, arr2) {
  * @param {Array} arr
  * @returns {Number}
  */
-function maxValue(arr) {
+function max(arr) {
   // 1. es6拓展运算符...
   // Math.max(...arr)
   // 2. es5 apply(与方法1原理相同)
@@ -42,11 +42,20 @@ function maxValue(arr) {
 }
 
 /**
+ * @desc 数组最小值
+ * @param {Array} arr
+ * @returns {Number}
+ */
+function min(arr) {
+  return Math.min.apply(null, arr);
+}
+
+/**
  * @desc 数组求和
  * @param {Array} arr
  * @returns {Number}
  */
-function sumValue(arr) {
+function sum(arr) {
   // var sum = 0;
   // var i;
   // for (i = 0; i < arr.length; i++) {
@@ -79,10 +88,55 @@ function arguments2Arr(obj) {
   return Array.prototype.slice.call(obj);
 }
 
+/**
+ * @desc 判断一个元素是否在数组中
+ * @param {Array} arr
+ * @param {Any} value
+ * @returns {Boolean}
+ */
+function contains(arr, value) {
+  return ~arr.indexOf(value) ? true : false;
+}
+
+/**
+ * @desc 数组去重
+ * @param {Array} arr
+ * @returns {Array}
+ */
+function unique(arr) {
+  // [...new Set(arr);
+  if (Array.hasOwnProperty("from")) {
+    return Array.from(new Set(arr));
+  } else {
+    var n = {},
+      r = [];
+    for (var i = 0; i < arr.length; i++) {
+      if (!n[arr[i]]) {
+        n[arr[i]] = true;
+        r.push(arr[i]);
+      }
+    }
+    return r;
+  }
+}
+
+/**
+ * @desc 数组平均值
+ * @param {Array} arr
+ * @returns {Number}
+ */
+function average(arr) {
+  return sum(arr) / arr.length;
+}
+
 module.exports = {
-  arrEqual,
-  maxValue,
-  sumValue,
+  equal,
+  max,
+  min,
+  sum,
   countOccurrences,
-  arguments2Arr
+  arguments2Arr,
+  contains,
+  unique,
+  average
 };

@@ -173,9 +173,9 @@ function toFixedExtend() {
     // 先直接截取对应的位数
     result = integer + "." + decimal.substr(0, n);
     // 获取后面的一位
-    const last = decimal.substr(n, 1);
+    let last = decimal.substr(n, 1);
     if (/^\d(9){5,}[89]$/.test(decimal.substr(n))) {
-      last = +last + 1;
+      last += last + 1;
     }
     // 大于等于5统一进一位
     if (parseInt(last, 10) >= 5) {
