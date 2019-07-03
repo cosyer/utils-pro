@@ -142,6 +142,22 @@ function isUndefined(value) {
   return Object.prototype.toString.call(value).slice(8, -1) === "Undefined";
 }
 
+/**
+ * @desc   检测value的类型
+ * @param  value 要检测的值
+ * @returns 返回检测值的类型
+ * @example
+ * ```ts
+ * getType(1) // => 'Number'
+ * getType(true) // => 'Boolean'
+ * getType([]) // => 'Array'
+ * getType(/hello/) // => 'RegExp'
+ * ```
+ */
+function getType(value) {
+  return Object.prototype.toString.call(value).slice(8, -1);
+}
+
 module.exports = {
   isArray,
   isBoolean,
@@ -153,5 +169,6 @@ module.exports = {
   isObj,
   isString,
   isTrue,
-  isUndefined
+  isUndefined,
+  getType
 };

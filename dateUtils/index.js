@@ -1,7 +1,7 @@
 /**
  * @desc   格式化${startTime}距现在的已过时间
  * @param  {Date} startTime
- * @return {String}
+ * @returns {String}
  */
 function formatPassTime(startTime) {
   var currentTime = Date.parse(new Date()),
@@ -23,7 +23,7 @@ function formatPassTime(startTime) {
  *
  * @desc   格式化现在距${endTime}的剩余时间
  * @param  {Date} endTime
- * @return {String}
+ * @returns {String}
  */
 function formatRemainTime(endTime) {
   var startDate = new Date(); //开始时间
@@ -60,7 +60,7 @@ function isLeapYear(year) {
  * @desc   判断是否为同一天
  * @param  {Date} date1
  * @param  {Date} date2 可选／默认值：当天
- * @return {Boolean}
+ * @returns {Boolean}
  */
 function isSameDay(a, b) {
   return (
@@ -108,7 +108,7 @@ function timeLeft(startTime, endTime) {
 /**
  * @desc   日期格式转化
  * @param  {String} dateStr "2019/6/20"
- * @return {String} "2019-6-20"
+ * @returns {String} "2019-6-20"
  */
 function skew2Horizontal(dateStr) {
   // let date = new Date();
@@ -125,7 +125,7 @@ function skew2Horizontal(dateStr) {
  * @desc   已知年月求当月多少天
  * @param  {Number} year
  * @param  {Number} month
- * @return {Number}
+ * @returns {Number}
  */
 // Date API 处理日期溢出时，会自动往后推延响应时间
 function getMonthCountDay(year, month) {
@@ -186,7 +186,7 @@ function dateExtend() {
 /**
  * @desc   秒数转时分秒
  * @param  {String} 秒数 s
- * @return {String}
+ * @returns {String}
  */
 function formatHMS(s) {
   var str = "";
@@ -206,6 +206,33 @@ function formatHMS(s) {
   return str;
 }
 
+/**
+ * @desc   获取当前时间
+ * @returns {String}
+ */
+function getCurrentTime(s) {
+  var today = new Date();
+  var year = today.getFullYear();
+  var month = today.getMonth() + 1;
+  var day = today.getDate();
+  var hours = today.getHours();
+  var minutes = today.getMinutes();
+  var seconds = today.getSeconds();
+  var timeString =
+    year +
+    "-" +
+    month +
+    "-" +
+    day +
+    " " +
+    hours +
+    ":" +
+    minutes +
+    ":" +
+    seconds;
+  return timeString;
+}
+
 module.exports = {
   formatPassTime,
   formatRemainTime,
@@ -215,5 +242,6 @@ module.exports = {
   skew2Horizontal,
   getMonthCountDay,
   dateExtend,
-  formatHMS
+  formatHMS,
+  getCurrentTime
 };

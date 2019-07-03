@@ -5,7 +5,7 @@
  * @return {Object}
  */
 // 核心：split
-function parseQueryString(url) {
+function urlToObj(url) {
   url = !url ? window.location.href : url;
   if (url.indexOf("?") === -1) {
     return {};
@@ -34,6 +34,28 @@ function getQueryStringObject(url) {
     (m, k, v) => (q[decodeURIComponent(k)] = decodeURIComponent(v))
   );
   return q;
+}
+
+/**
+ *
+ * @desc   obj转url参数
+ * @param  {String} baseUrl
+ * @param  {Object} obj
+ * @return {String}
+ */
+function objToUrl(baseUrl, obj) {
+  var parameters = "";
+  var url = "";
+  for (var key in obj) {
+    parameters += key + "=" + obj[key] + "&";
+  }
+  parameters = parameters.replace(/&$/, "");
+  if (/\?$/.test(baseUrl)) {
+    url = baseUrl + parameters;
+  } else {
+    url = baseUrl.replace(/\/?$/, "?") + parameters;
+  }
+  return url;
 }
 
 /**
@@ -83,8 +105,9 @@ function stringfyQueryString(obj) {
 }
 
 module.exports = {
-  parseQueryString,
+  urlToObj,
   getQueryStringObject,
+  objToUrl,
   getQueryString,
   stringfyQueryString
 };

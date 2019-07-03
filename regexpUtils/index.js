@@ -27,6 +27,7 @@ function isEmail(str) {
  * @returns {Boolean}
  */
 function isIdCard(str) {
+  // /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
   return /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/.test(
     str
   );
@@ -125,6 +126,7 @@ function isStrictIdCard(str) {
  * @returns {Boolean}
  */
 function isPhoneNum(str) {
+  // /^1((3[\d])|(4[5,6,7,9])|(5[0-3,5-9])|(6[5-7])|(7[0-8])|(8[\d])|(9[1,8,9]))\d{8}$/
   return /^(\+?0?86\-?)?1[3456789]\d{9}$/.test(str);
 }
 
@@ -212,6 +214,7 @@ function isPrime(n) {
  * @returns {Boolean}
  */
 function isTelNum(str) {
+  // /\d{3}-\d{8}|\d{4}-\d{7}/
   return /^(0\d{2,3}-\d{7,8})(-\d{1,4})?$/.test(str);
 }
 
@@ -232,6 +235,7 @@ function isPwd(str) {
  * @returns {Boolean}
  */
 function isPostal(str) {
+  // /^(0[1-7]|1[0-356]|2[0-7]|3[0-6]|4[0-7]|5[1-7]|6[1-7]|7[0-5]|8[013-6])\d{4}$/
   return /[1-9]\d{5}(?!\d)/.test(str);
 }
 
@@ -257,11 +261,11 @@ function isMoney(str) {
 
 /**
  *
- * @desc   判断是否为IP地址
+ * @desc   判断是否为IP4地址
  * @param  {String} str
  * @returns {Boolean}
  */
-function isIP(str) {
+function isIP4(str) {
   return /((?:(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d))/.test(
     str
   );
@@ -337,6 +341,36 @@ function checkPwd(str) {
   return Lv;
 }
 
+/**
+ *
+ * @desc   判断银行卡号(16或19位)
+ * @param  {String} str
+ * @returns {Number}
+ */
+function isBankCard(str) {
+  return /^([1-9]{1})(\d{15}|\d{18})$/.test(str);
+}
+
+/**
+ *
+ * @desc   判断是否小数
+ * @param  {String} str
+ * @returns {Number}
+ */
+function isDecimal(str) {
+  return /^\d+\.\d+$/.test(str);
+}
+
+/**
+ *
+ * @desc   判断微信号(6至20位，以字母开头，字母，数字，减号，下划线)
+ * @param  {String} str
+ * @returns {Number}
+ */
+function isWxNum(str) {
+  return /^[a-zA-Z]([-_a-zA-Z0-9]{5,19})+$/.test(str);
+}
+
 module.exports = {
   isColor,
   isEmail,
@@ -351,10 +385,13 @@ module.exports = {
   isPostal,
   isQQ,
   isMoney,
-  isIP,
+  isIP4,
   isDate,
   isEnglish,
   isChinese,
   isHTML,
-  checkPwd
+  checkPwd,
+  isBankCard,
+  isDecimal,
+  isWxNum
 };
