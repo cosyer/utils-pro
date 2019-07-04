@@ -130,6 +130,38 @@ function average(arr) {
   return sum(arr) / arr.length;
 }
 
+/**
+ * @desc 数组排序
+ * @param  {Array} 数组
+ * @param  {type} 1：从小到大   2：从大到小   3：随机
+ * @returns {Array}
+ */
+function sort(arr, type = 1) {
+  return arr.sort((a, b) => {
+    switch (type) {
+      case 1:
+        return a - b;
+      case 2:
+        return b - a;
+      case 3:
+        return Math.random() - 0.5;
+      default:
+        return arr;
+    }
+  });
+}
+
+/**
+ * @desc 求数组并集
+ * @param  {Array} a
+ * @param  {Array} b
+ * @returns {Array}
+ */
+function union(a, b) {
+  var newArr = a.concat(b);
+  return unique(newArr);
+}
+
 module.exports = {
   equal,
   max,
@@ -139,5 +171,7 @@ module.exports = {
   arguments2Arr,
   contains,
   unique,
-  average
+  average,
+  sort,
+  union
 };
