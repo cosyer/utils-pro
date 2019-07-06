@@ -162,6 +162,22 @@ function union(a, b) {
   return unique(newArr);
 }
 
+/**
+ * @desc 求数组的交集
+ * @param  {Array} a
+ * @param  {Array} b
+ * @returns {Array}
+ */
+function intersect(a, b) {
+  a = unique(a);
+  b = unique(b);
+  var c = a.length > b.length ? a : b;
+  var d = a.length > b.length ? b : a;
+  return d.map(function(o) {
+    return contains(c, o) ? o : null;
+  });
+}
+
 module.exports = {
   equal,
   max,
@@ -173,5 +189,6 @@ module.exports = {
   unique,
   average,
   sort,
-  union
+  union,
+  intersect
 };

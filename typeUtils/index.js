@@ -1,7 +1,7 @@
 /**
  * @desc   判断是否为数组
  * @param  {*} value
- * @return {Boolean}
+ * @returns {Boolean}
  */
 
 function isArray(value) {
@@ -31,7 +31,7 @@ function isArray(value) {
 /**
  * @desc   判断是否为布尔类型
  * @param  {*} value
- * @return {Boolean}
+ * @returns {Boolean}
  */
 
 function isBoolean(value) {
@@ -41,7 +41,7 @@ function isBoolean(value) {
 /**
  * @desc   判断是否为日期类型
  * @param  {*} value
- * @return {Boolean}
+ * @returns {Boolean}
  */
 
 function isDate(value) {
@@ -51,7 +51,7 @@ function isDate(value) {
 /**
  * @desc   判断是否为假值
  * @param  {*} o
- * @return {Boolean}
+ * @returns {Boolean}
  */
 
 function isFalse(o) {
@@ -72,7 +72,7 @@ function isFalse(o) {
 /**
  * @desc   判断是否为函数
  * @param  {*} value
- * @return {Boolean}
+ * @returns {Boolean}
  */
 
 function isFunction(value) {
@@ -82,7 +82,7 @@ function isFunction(value) {
 /**
  * @desc   判断是否为null
  * @param  {*} value
- * @return {Boolean}
+ * @returns {Boolean}
  */
 
 function isNull(value) {
@@ -93,7 +93,7 @@ function isNull(value) {
 /**
  * @desc   判断是否为数字类型
  * @param  {*} value
- * @return {Boolean}
+ * @returns {Boolean}
  */
 
 function isNumber(value) {
@@ -104,7 +104,7 @@ function isNumber(value) {
 /**
  * @desc   判断是否为对象
  * @param  {*} value
- * @return {Boolean}
+ * @returns {Boolean}
  */
 
 function isObj(value) {
@@ -114,7 +114,7 @@ function isObj(value) {
 /**
  * @desc   判断是否为字符串类型
  * @param  {*} value
- * @return {Boolean}
+ * @returns {Boolean}
  */
 
 function isString(value) {
@@ -124,7 +124,7 @@ function isString(value) {
 /**
  * @desc   判断是否为真值
  * @param  {*} o
- * @return {Boolean}
+ * @returns {Boolean}
  */
 
 function isTrue(o) {
@@ -134,12 +134,82 @@ function isTrue(o) {
 /**
  * @desc   判断是否为undefined
  * @param  {*} value
- * @return {Boolean}
+ * @returns {Boolean}
  */
 
 function isUndefined(value) {
   // return value === undefined;
   return Object.prototype.toString.call(value).slice(8, -1) === "Undefined";
+}
+
+/**
+ * @desc   判断是否为Promise对象
+ * @param  {*} value
+ * @returns {Boolean}
+ */
+
+function isPromise(value) {
+  return Object.prototype.toString.call(value).slice(8, -1) === "Promise";
+}
+
+/**
+ * @desc   判断是否为Map
+ * @param  {*} value
+ * @returns {Boolean}
+ */
+
+function isMap(value) {
+  return Object.prototype.toString.call(value).slice(8, -1) === "Map";
+}
+
+/**
+ * @desc   判断是否为WeakMap
+ * @param  {*} value
+ * @returns {Boolean}
+ */
+
+function isWeakMap(value) {
+  return Object.prototype.toString.call(value).slice(8, -1) === "WeakMap";
+}
+
+/**
+ * @desc   判断是否为Set
+ * @param  {*} value
+ * @returns {Boolean}
+ */
+
+function isSet(value) {
+  return Object.prototype.toString.call(value).slice(8, -1) === "Set";
+}
+
+/**
+ * @desc   判断是否为WeakSet
+ * @param  {*} value
+ * @returns {Boolean}
+ */
+
+function isWeakSet(value) {
+  return Object.prototype.toString.call(value).slice(8, -1) === "WeakSet";
+}
+
+/**
+ * @desc   判断是否为Symbol
+ * @param  {*} value
+ * @returns {Boolean}
+ */
+
+function isSymbol(value) {
+  return Object.prototype.toString.call(value).slice(8, -1) === "Symbol";
+}
+
+/**
+ * @desc   判断是否为BigInt
+ * @param  {*} value
+ * @returns {Boolean}
+ */
+
+function isBigInt(value) {
+  return Object.prototype.toString.call(value).slice(8, -1) === "BigInt";
 }
 
 /**
@@ -170,5 +240,12 @@ module.exports = {
   isString,
   isTrue,
   isUndefined,
+  isPromise,
+  isMap,
+  isWeakMap,
+  isSet,
+  isWeakSet,
+  isSymbol,
+  isBigInt,
   getType
 };
