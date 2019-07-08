@@ -347,6 +347,127 @@ function compareVersion(v1, v2) {
   return 0;
 }
 
+/**
+ * @desc 年份计算生肖
+ * @param {Number} year
+ * @returns {String}
+ */
+function setChineseZodiac(year) {
+  var startYear = 1804;
+  if (year < startYear) {
+    startYear = startYear - (12 + 12 * ((startYear - year) / 12));
+  }
+  var constants = [
+    "鼠",
+    "牛",
+    "虎",
+    "兔",
+    "龙",
+    "蛇",
+    "马",
+    "羊",
+    "猴",
+    "鸡",
+    "狗",
+    "猪"
+  ];
+  return constants[(year - startYear) % 12]; //加一是因为constants里是1起始地
+}
+
+/**
+ * 日期计算星座
+ * @param {Number} month
+ * @param {Number} day
+ * @returns {String}
+ */
+function setConstellation(month, day) {
+  if ((month == 1 && day >= 20) || (month == 2 && day <= 18)) {
+    return "水瓶座";
+  }
+  if ((month == 2 && day >= 19) || (month == 3 && day <= 20)) {
+    return "双鱼座";
+  }
+  if ((month == 3 && day >= 21) || (month == 4 && day <= 19)) {
+    return "白羊座";
+  }
+  if ((month == 4 && day >= 20) || (month == 5 && day <= 20)) {
+    return "金牛座";
+  }
+  if ((month == 5 && day >= 21) || (month == 6 && day <= 21)) {
+    return "双子座";
+  }
+  if ((month == 6 && day >= 22) || (month == 7 && day <= 22)) {
+    return "巨蟹座";
+  }
+  if ((month == 7 && day >= 23) || (month == 8 && day <= 22)) {
+    return "狮子座";
+  }
+  if ((month == 8 && day >= 23) || (month == 9 && day <= 22)) {
+    return "处女座";
+  }
+  if ((month == 9 && day >= 23) || (month == 10 && day <= 22)) {
+    return "天秤座";
+  }
+  if ((month == 10 && day >= 23) || (month == 11 && day <= 21)) {
+    return "天蝎座";
+  }
+  if ((month == 11 && day >= 22) || (month == 12 && day <= 21)) {
+    return "射手座";
+  }
+  if ((month == 12 && day >= 22) || (month == 1 && day <= 19)) {
+    return "摩羯座";
+  }
+}
+
+/**
+ * 根据身份证号获得出生日期
+ * @param {String} psidno
+ * @returns {String}
+ */
+function getBirthday(psidno) {
+  var birthdayno, birthdaytemp;
+  if (psidno.length == 18) {
+    birthdayno = psidno.substring(6, 14);
+  } else if (psidno.length == 15) {
+    birthdaytemp = psidno.substring(6, 12);
+    birthdayno = "19" + birthdaytemp;
+  } else {
+    alert("错误的身份证号码，请核对！");
+    return false;
+  }
+  var birthday =
+    birthdayno.substring(0, 4) +
+    "-" +
+    birthdayno.substring(4, 6) +
+    "-" +
+    birthdayno.substring(6, 8);
+  return birthday;
+}
+
+/**
+ * 根据身份证号获取性别
+ * @param {String} psidno
+ * @returns {Number} 1男2女
+ */
+function getSex(psidno) {
+  var sexno, sex;
+  if (psidno.length == 18) {
+    sexno = psidno.substring(16, 17);
+  } else if (psidno.length == 15) {
+    sexno = psidno.substring(14, 15);
+  } else {
+    alert("错误的身份证号码，请核对！");
+    return false;
+  }
+  var tempid = sexno % 2;
+  if (tempid == 0) {
+    sex = 2;
+  } else {
+    sex = 1;
+  }
+  return sex;
+}
+
 module.exports = {
   debounce,
   throttle,
@@ -360,5 +481,9 @@ module.exports = {
   copy,
   copyWithCopyRight,
   createAndDownloadFile,
-  compareVersion
+  compareVersion,
+  setChineseZodiac,
+  setConstellation,
+  getBirthday,
+  getSex
 };
