@@ -7,7 +7,7 @@ function deepClone(values) {
   var copy;
 
   // Handle the 3 simple types, and null or undefined
-  if (null == values || "object" != typeof values) return values;
+  if (null === values || "object" !== typeof values) return values;
 
   // Handle Date
   if (values instanceof Date) {

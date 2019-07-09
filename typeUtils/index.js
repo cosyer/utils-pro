@@ -56,14 +56,14 @@ function isDate(value) {
 
 function isFalse(o) {
   if (
-    o == "" ||
-    o == undefined ||
-    o == null ||
-    o == "null" ||
-    o == "undefined" ||
-    o == 0 ||
-    o == false ||
-    o == NaN
+    o === "" ||
+    o === undefined ||
+    o === null ||
+    o === "null" ||
+    o === "undefined" ||
+    o === 0 ||
+    o === false ||
+    o === NaN
   )
     return true;
   return false;

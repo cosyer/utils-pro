@@ -181,7 +181,7 @@ function numToChinese(num) {
         k = 0;
         break;
     }
-    if (k % 4 == 2 && a[0].charAt(i + 2) != 0 && a[0].charAt(i + 1) == 0)
+    if (k % 4 === 2 && a[0].charAt(i + 2) != 0 && a[0].charAt(i + 1) === 0)
       re = AA[0] + re;
     if (a[0].charAt(i) != 0) re = AA[a[0].charAt(i)] + BB[k % 4] + re;
     k++;
@@ -192,8 +192,8 @@ function numToChinese(num) {
     re += BB[6];
     for (var i = 0; i < a[1].length; i++) re += AA[a[1].charAt(i)];
   }
-  if (re == "一十") re = "十";
-  if (re.match(/^一/) && re.length == 3) re = re.replace("一", "");
+  if (re === "一十") re = "十";
+  if (re.match(/^一/) && re.length === 3) re = re.replace("一", "");
   return re;
 }
 

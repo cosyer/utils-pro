@@ -137,7 +137,7 @@ function toFixedExtend() {
       return number.toString();
     }
     // 默认保留整数
-    if (typeof n == "undefined" || n == 0) {
+    if (typeof n === "undefined" || n === 0) {
       return Math.round(number).toString();
     }
 
@@ -159,7 +159,7 @@ function toFixedExtend() {
     const integer = arr[0];
     const decimal = arr[1];
     // 如果已经符合要求位数，直接返回
-    if (decimal.length == n) {
+    if (decimal.length === n) {
       return result;
     }
     // 如果小于指定的位数，补上
@@ -381,40 +381,40 @@ function setChineseZodiac(year) {
  * @returns {String}
  */
 function setConstellation(month, day) {
-  if ((month == 1 && day >= 20) || (month == 2 && day <= 18)) {
+  if ((month === 1 && day >= 20) || (month === 2 && day <= 18)) {
     return "水瓶座";
   }
-  if ((month == 2 && day >= 19) || (month == 3 && day <= 20)) {
+  if ((month === 2 && day >= 19) || (month === 3 && day <= 20)) {
     return "双鱼座";
   }
-  if ((month == 3 && day >= 21) || (month == 4 && day <= 19)) {
+  if ((month === 3 && day >= 21) || (month === 4 && day <= 19)) {
     return "白羊座";
   }
-  if ((month == 4 && day >= 20) || (month == 5 && day <= 20)) {
+  if ((month === 4 && day >= 20) || (month === 5 && day <= 20)) {
     return "金牛座";
   }
-  if ((month == 5 && day >= 21) || (month == 6 && day <= 21)) {
+  if ((month === 5 && day >= 21) || (month === 6 && day <= 21)) {
     return "双子座";
   }
-  if ((month == 6 && day >= 22) || (month == 7 && day <= 22)) {
+  if ((month === 6 && day >= 22) || (month === 7 && day <= 22)) {
     return "巨蟹座";
   }
-  if ((month == 7 && day >= 23) || (month == 8 && day <= 22)) {
+  if ((month === 7 && day >= 23) || (month === 8 && day <= 22)) {
     return "狮子座";
   }
-  if ((month == 8 && day >= 23) || (month == 9 && day <= 22)) {
+  if ((month === 8 && day >= 23) || (month === 9 && day <= 22)) {
     return "处女座";
   }
-  if ((month == 9 && day >= 23) || (month == 10 && day <= 22)) {
+  if ((month === 9 && day >= 23) || (month === 10 && day <= 22)) {
     return "天秤座";
   }
-  if ((month == 10 && day >= 23) || (month == 11 && day <= 21)) {
+  if ((month === 10 && day >= 23) || (month === 11 && day <= 21)) {
     return "天蝎座";
   }
-  if ((month == 11 && day >= 22) || (month == 12 && day <= 21)) {
+  if ((month === 11 && day >= 22) || (month === 12 && day <= 21)) {
     return "射手座";
   }
-  if ((month == 12 && day >= 22) || (month == 1 && day <= 19)) {
+  if ((month === 12 && day >= 22) || (month === 1 && day <= 19)) {
     return "摩羯座";
   }
 }
@@ -426,13 +426,13 @@ function setConstellation(month, day) {
  */
 function getBirthday(psidno) {
   var birthdayno, birthdaytemp;
-  if (psidno.length == 18) {
+  if (psidno.length === 18) {
     birthdayno = psidno.substring(6, 14);
-  } else if (psidno.length == 15) {
+  } else if (psidno.length === 15) {
     birthdaytemp = psidno.substring(6, 12);
     birthdayno = "19" + birthdaytemp;
   } else {
-    alert("错误的身份证号码，请核对！");
+    chalkPrint("错误的身份证号码，请核对！");
     return false;
   }
   var birthday =
@@ -451,16 +451,16 @@ function getBirthday(psidno) {
  */
 function getSex(psidno) {
   var sexno, sex;
-  if (psidno.length == 18) {
+  if (psidno.length === 18) {
     sexno = psidno.substring(16, 17);
-  } else if (psidno.length == 15) {
+  } else if (psidno.length === 15) {
     sexno = psidno.substring(14, 15);
   } else {
-    alert("错误的身份证号码，请核对！");
+    chalkPrint("错误的身份证号码，请核对！");
     return false;
   }
   var tempid = sexno % 2;
-  if (tempid == 0) {
+  if (tempid === 0) {
     sex = 2;
   } else {
     sex = 1;

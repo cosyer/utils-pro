@@ -43,7 +43,7 @@ function BrowserType() {
   var isEdge = userAgent.indexOf("Windows NT 6.1; Trident/7.0;") > -1 && !isIE; //判断是否IE的Edge浏览器
   var isFF = userAgent.indexOf("Firefox") > -1; //判断是否Firefox浏览器
   var isSafari =
-    userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") == -1; //判断是否Safari浏览器
+    userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") === -1; //判断是否Safari浏览器
   var isChrome =
     userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Safari") > -1; //判断Chrome浏览器
 
@@ -51,15 +51,15 @@ function BrowserType() {
     var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
     reIE.test(userAgent);
     var fIEVersion = parseFloat(RegExp["$1"]);
-    if (fIEVersion == 7) {
+    if (fIEVersion === 7) {
       return "IE7";
-    } else if (fIEVersion == 8) {
+    } else if (fIEVersion === 8) {
       return "IE8";
-    } else if (fIEVersion == 9) {
+    } else if (fIEVersion === 9) {
       return "IE9";
-    } else if (fIEVersion == 10) {
+    } else if (fIEVersion === 10) {
       return "IE10";
-    } else if (fIEVersion == 11) {
+    } else if (fIEVersion === 11) {
       return "IE11";
     } else {
       return "0";
