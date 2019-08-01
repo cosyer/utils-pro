@@ -4,7 +4,10 @@
 [![](https://img.shields.io/npm/dm/utils-pro.svg?style=flat)](https://npmjs.com/package/utils-pro)
 [![](https://img.shields.io/bundlephobia/minzip/utils-pro.svg?style=flat)](https://bundlephobia.com/result?p=utils-pro)
 
+![](https://nodei.co/npm/utils-pro.png?downloads=true&downloadRank=true&stars=true)
+
 `utils-pro` 提供常用的一些工具函数和方法
+
 
 ### 引入方式
 1. `utils-pro`支持script标签引入，挂载在全局的window.rook变量下。
