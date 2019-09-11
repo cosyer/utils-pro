@@ -371,6 +371,16 @@ function isWxNum(str) {
   return /^[a-zA-Z]([-_a-zA-Z0-9]{5,19})+$/.test(str);
 }
 
+/**
+ *
+ * @desc   字符串去除相邻的重复项
+ * @param  {String} str 'aabbccddeexxxxaa' => 'abcdexa'
+ * @returns {String}
+ */
+function adjacentUnique(str) {
+  return str.replace(/(\w)\1+/g, "$1");
+}
+
 module.exports = {
   isColor,
   isEmail,
@@ -393,5 +403,6 @@ module.exports = {
   checkPwd,
   isBankCard,
   isDecimal,
-  isWxNum
+  isWxNum,
+  adjacentUnique
 };
