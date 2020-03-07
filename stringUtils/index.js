@@ -6,7 +6,10 @@
 function digitUppercase(n) {
   var fraction = ["角", "分"];
   var digit = ["零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"];
-  var unit = [["元", "万", "亿"], ["", "拾", "佰", "仟"]];
+  var unit = [
+    ["元", "万", "亿"],
+    ["", "拾", "佰", "仟"]
+  ];
   var head = n < 0 ? "欠" : "";
   n = Math.abs(n);
   var s = "";
@@ -177,6 +180,32 @@ function trim(str, type) {
   }
 }
 
+/**
+ * @desc 字符串转base64
+ * @param {String} str
+ * @returns {String}
+ */
+function str2Base64(str) {
+  // 对字符串进行编码
+  var encode = encodeURI(str);
+  // 对编码的字符串转化base64
+  var base64 = btoa(encode);
+  return base64;
+}
+
+/**
+ * @desc 字符串转base64
+ * @param {String} str
+ * @returns {String}
+ */
+function Base642Str(base64) {
+  // 对base64转编码
+  var decode = atob(base64);
+  // 编码转字符串
+  var str = decodeURI(decode);
+  return str;
+}
+
 module.exports = {
   digitUppercase,
   subStrWithEllpsis,
@@ -189,5 +218,7 @@ module.exports = {
   titleCase,
   getFileExtension,
   reverse,
-  trim
+  trim,
+  str2Base64,
+  Base642Str
 };
