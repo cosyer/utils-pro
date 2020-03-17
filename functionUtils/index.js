@@ -538,6 +538,39 @@ function resolveFieldData(data, field) {
   return null;
 }
 
+/**
+ * 封装ajax请求
+ * @param {string} url
+ * @param {string} method
+ * @param {object} params
+ * @returns
+ */
+function request(url, method = "GET", params = null) {
+  return new Promise((resolve, reject) => {
+    let xhr = null;
+    if (window.XMLHttpRequest) {
+      xhr = new XMLHttpRequest();
+    } else {
+      xhr = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xhr.open(method, url);
+    xhr.addEventListener("readystatechange", () => {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          resolve(xhr.responseText);
+        } else {
+          reject({
+            code: xhr.status,
+            response: xhr.response
+          });
+        }
+      }
+    });
+    setTimeout(() => reject("timeout:1000"), 1000);
+    xhr.send(JSON.stringify(params));
+  });
+}
+
 module.exports = {
   debounce,
   throttle,
@@ -556,5 +589,6 @@ module.exports = {
   setConstellation,
   getBirthday,
   getSex,
-  exportCSV
+  exportCSV,
+  request
 };
