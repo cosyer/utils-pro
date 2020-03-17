@@ -1,6 +1,6 @@
 {
   "name": "utils-pro",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "一些常用的 JavaScript 工具函数",
   "main": "dist/rook.min.js",
   "types": "index.d.ts",

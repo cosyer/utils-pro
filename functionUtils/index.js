@@ -305,10 +305,10 @@ function copyWithCopyRight() {
 function createAndDownloadFile(fileName, filePath) {
   // 创建隐藏的可下载链接
   var eleLink = document.createElement("a");
-  eleLink.download = filename;
+  eleLink.download = fileName;
   eleLink.style.display = "none";
   // 字符内容转变成blob地址
-  var blob = new Blob([fileName]);
+  var blob = new Blob([filePath]);
   eleLink.href = URL.createObjectURL(blob);
   // 触发点击
   document.body.appendChild(eleLink);
@@ -468,6 +468,76 @@ function getSex(psidno) {
   return sex;
 }
 
+/**
+ * 导出csv文件
+ * @param {Array<string>} columns ['name', 'age']
+ * @param {String} fileName '文件名'
+ * @param {Array<Object>} data 【{name:'cosyer',age:23}】
+ */
+function exportCSV(columns, filename, data) {
+  var csv = "\ufeff";
+  var _this = this;
+  for (var i = 0; i < columns.length; i++) {
+    var col = columns[i];
+    csv += '"' + (col.header || col) + '"';
+    if (i < columns.length - 1) {
+      csv += ",";
+    }
+  }
+  data.forEach(function(item) {
+    csv += "\n";
+    for (var i_1 = 0; i_1 < columns.length; i_1++) {
+      var column = columns[i_1];
+      csv += '"' + resolveFieldData(item, column) + '"';
+      if (i_1 < columns.length - 1) {
+        csv += ",";
+      }
+    }
+  });
+  var blob = new Blob([csv], {
+    type: "text/csv;charset=utf-8;"
+  });
+  if (window.navigator.msSaveOrOpenBlob) {
+    window.navigator.msSaveOrOpenBlob(blob, filename + ".csv");
+  } else {
+    var link = document.createElement("a");
+    link.style.display = "none";
+    var isFF = window.navigator.userAgent.indexOf("Firefox") > -1;
+    if (isFF) {
+      document.body.appendChild(link);
+    }
+    if (typeof link.download !== "undefined") {
+      link.setAttribute("href", URL.createObjectURL(blob));
+      link.setAttribute("download", filename + ".csv");
+      link.click();
+    } else {
+      window.open(encodeURI("data:text/csv;charset=utf-8," + csv));
+    }
+    if (isFF) {
+      document.body.removeChild(link);
+    }
+  }
+}
+
+// 构建csv格式
+function resolveFieldData(data, field) {
+  if (data && field) {
+    if (field.indexOf(".") === -1) {
+      return data[field];
+    }
+    var fields = field.spilt(".");
+    var value = data;
+    for (var i = 0, len = fields.length; i < len; i++) {
+      if (value === null) {
+        return null;
+      }
+      value = value[fields[i]];
+    }
+    return value;
+  }
+  return null;
+}
+
 module.exports = {
   debounce,
   throttle,
@@ -485,5 +555,6 @@ module.exports = {
   setChineseZodiac,
   setConstellation,
   getBirthday,
-  getSex
+  getSex,
+  exportCSV
 };
