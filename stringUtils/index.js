@@ -130,6 +130,8 @@ function replacePhone(phone) {
  * @returns {String}
  */
 function titleCase(str) {
+  // const capitalizeEveryWord = str =>
+  // str.replace(/\b[a-z]/g, char => char.toUpperCase());
   return s.toLowerCase().replace(/\b([\w|']+)\b/g, function(word) {
     //return word.slice(0, 1).toUpperCase() + word.slice(1);
     return word.replace(word.charAt(0), word.charAt(0).toUpperCase());
@@ -206,6 +208,15 @@ function Base642Str(base64) {
   return str;
 }
 
+/**
+ * @desc 返回字符串的字节长度。
+ * @param {String} str
+ * @returns {Number}
+ */
+function byteSize(str) {
+  return new Blob([str]).size;
+}
+
 module.exports = {
   digitUppercase,
   subStrWithEllpsis,
@@ -220,5 +231,6 @@ module.exports = {
   reverse,
   trim,
   str2Base64,
-  Base642Str
+  Base642Str,
+  byteSize
 };

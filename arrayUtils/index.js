@@ -178,6 +178,16 @@ function intersect(a, b) {
   });
 }
 
+/**
+ * @desc 数组相同项的次数
+ * @param  {Array} a
+ * @param  {str/number} b
+ * @returns {Number}
+ */
+function countOccurrences(a, b) {
+  return arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
+}
+
 module.exports = {
   equal,
   max,
@@ -190,5 +200,6 @@ module.exports = {
   average,
   sort,
   union,
-  intersect
+  intersect,
+  countOccurrences
 };
