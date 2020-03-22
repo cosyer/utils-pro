@@ -104,10 +104,59 @@ function stringfyQueryString(obj) {
   return pairs.join("&");
 }
 
+/**
+ * 返回当前url
+ * @returns { string }
+ */
+function currentURL() {
+  return window.location.href;
+}
+
+/**
+ * 修改url中的参数
+ * @param { string } paramName
+ * @param { string } replaceWith
+ */
+function replaceParamVal(paramName, replaceWith) {
+  var oUrl = location.href.toString();
+  var re = eval("/(" + paramName + "=)([^&]*)/gi");
+  location.href = oUrl.replace(re, paramName + "=" + replaceWith);
+  return location.href;
+}
+
+/**
+ * 删除url中指定的参数
+ * @param { string } name
+ */
+function funcUrlDel(name) {
+  var loca = location;
+  var baseUrl = loca.origin + loca.pathname + "?";
+  var query = loca.search.substr(1);
+  if (query.indexOf(name) > -1) {
+    var obj = {};
+    var arr = query.split("&");
+    for (var i = 0; i < arr.length; i++) {
+      arr[i] = arr[i].split("=");
+      obj[arr[i][0]] = arr[i][1];
+    }
+    delete obj[name];
+    var url =
+      baseUrl +
+      JSON.stringify(obj)
+        .replace(/[\"\{\}]/g, "")
+        .replace(/\:/g, "=")
+        .replace(/\,/g, "&");
+    return url;
+  }
+}
+
 module.exports = {
   urlToObj,
   getQueryStringObject,
   objToUrl,
   getQueryString,
-  stringfyQueryString
+  stringfyQueryString,
+  currentURL,
+  replaceParamVal,
+  funcUrlDel
 };

@@ -61,5 +61,6 @@ function generateDynamic32UUID() {
 }
 
 module.exports = {
-  generateUUID
+  generateUUID,
+  generateDynamic32UUID
 };

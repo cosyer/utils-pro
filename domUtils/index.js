@@ -163,6 +163,23 @@ function viewModel(inputObj, outputObj) {
   });
 }
 
+/**
+ * 转义html(防XSS攻击)
+ */
+function escapeHTML(str) {
+  str.replace(
+    /[&<>'"]/g,
+    tag =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "'": "&#39;",
+        '"': "&quot;"
+      }[tag] || tag)
+  );
+}
+
 module.exports = {
   hasClass,
   addClass,
@@ -172,5 +189,6 @@ module.exports = {
   html2Str,
   siblings,
   str2Html,
-  viewModel
+  viewModel,
+  escapeHTML
 };

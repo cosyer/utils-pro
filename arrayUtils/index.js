@@ -176,6 +176,7 @@ function intersect(a, b) {
   return d.map(function(o) {
     return contains(c, o) ? o : null;
   });
+  // return a.filter(v => b.includes(v));
 }
 
 /**

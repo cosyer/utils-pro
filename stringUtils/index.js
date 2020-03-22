@@ -38,6 +38,15 @@ function digitUppercase(n) {
 }
 
 /**
+ * @desc   金钱格式化，三位加逗号
+ * @param {Number} num 截取长度
+ * @returns {String}
+ */
+function formatMoney(num) {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+/**
  * @desc   截取字符串 剩余部分用...代替
  * @param  {String} str 字符串
  * @param {Number} len 截取长度
@@ -217,8 +226,43 @@ function byteSize(str) {
   return new Blob([str]).size;
 }
 
+/**
+ * @desc i18n词条替换
+ * @param {String} s 语料
+ * @param {Object} o
+ * @returns {String}
+ */
+function i18nReplace(s, o) {
+  if (!s || !o) {
+    return;
+  }
+  return s.replace
+    ? s.replace(/\{\s*([^\|\}]+?)\s*(?:\|([^\}]*))?\s*\}/g, function(
+        match,
+        key
+      ) {
+        return o[key] !== undefined ? o[key] : match;
+      })
+    : s;
+}
+
+/**
+ * 数字超过规定大小加上加号“+”，如数字超过99显示99+
+ * @param { number } val 输入的数字
+ * @param { number } maxNum 数字规定界限
+ */
+function outOfNum(val, maxNum) {
+  val = val ? val - 0 : 0;
+  if (val > maxNum) {
+    return `${maxNum}+`;
+  } else {
+    return val;
+  }
+}
+
 module.exports = {
   digitUppercase,
+  formatMoney,
   subStrWithEllpsis,
   b64EncodeUnicode,
   b64DecodeUnicode,
@@ -232,5 +276,7 @@ module.exports = {
   trim,
   str2Base64,
   Base642Str,
-  byteSize
+  byteSize,
+  i18nReplace,
+  outOfNum
 };

@@ -232,6 +232,91 @@ function bottomVisible() {
   return value;
 }
 
+/**
+ * 获取窗口可视范围的高度
+ */
+function getClientHeight() {
+  let clientHeight = 0;
+  if (document.body.clientHeight && document.documentElement.clientHeight) {
+    clientHeight =
+      document.body.clientHeight < document.documentElement.clientHeight
+        ? document.body.clientHeight
+        : document.documentElement.clientHeight;
+  } else {
+    clientHeight =
+      document.body.clientHeight > document.documentElement.clientHeight
+        ? document.body.clientHeight
+        : document.documentElement.clientHeight;
+  }
+  return clientHeight;
+}
+
+/**
+ *  获取滚动条距左边的高度
+ */
+function getPageScrollLeft() {
+  let a = document;
+  return a.documentElement.scrollLeft || a.body.scrollLeft;
+}
+
+/**
+ * 开启全屏
+ * @param {*} element
+ */
+function launchFullscreen(element) {
+  if (element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if (element.mozRequestFullScreen) {
+    element.mozRequestFullScreen();
+  } else if (element.msRequestFullscreen) {
+    element.msRequestFullscreen();
+  } else if (element.webkitRequestFullscreen) {
+    element.webkitRequestFullScreen();
+  }
+}
+
+/**
+ *  关闭全屏
+ */
+function exitFullscreen() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.msExitFullscreen) {
+    document.msExitFullscreen();
+  } else if (document.mozCancelFullScreen) {
+    document.mozCancelFullScreen();
+  } else if (document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  }
+}
+
+/**
+ * 返回当前滚动条位置
+ */
+function getScrollPosition(el = window) {
+  ({
+    x: el.pageXOffset !== undefined ? el.pageXOffset : el.scrollLeft,
+    y: el.pageYOffset !== undefined ? el.pageYOffset : el.scrollTop
+  });
+}
+
+/**
+ * 滚动到指定元素区域
+ */
+function smoothScroll(element) {
+  document.querySelector(element).scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+/**
+ * http跳转https
+ */
+function httpsRedirect() {
+  if (location.protocol !== "https:")
+    location.replace("https://" + location.href.split("//")[1]);
+}
+
 module.exports = {
   getScrollTop,
   offset,
@@ -243,5 +328,11 @@ module.exports = {
   getCoordInDocument,
   disableScroll,
   enableScroll,
-  bottomVisible
+  bottomVisible,
+  getClientHeight,
+  getPageScrollLeft,
+  launchFullscreen,
+  exitFullscreen,
+  getScrollPosition,
+  smoothScroll
 };

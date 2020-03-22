@@ -261,13 +261,19 @@ function isMoney(str) {
 
 /**
  *
- * @desc   判断是否为IP4地址
+ * @desc   判断是否为IPv4地址
  * @param  {String} str
  * @returns {Boolean}
  */
-function isIP4(str) {
+function isIPv4(str) {
   return /((?:(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d))/.test(
     str
+  );
+}
+
+function isIPv6(value) {
+  return /^((([0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}:[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){5}:([0-9A-Fa-f]{1,4}:)?[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){4}:([0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){3}:([0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){2}:([0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(([0-9A-Fa-f]{1,4}:){0,5}:((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(::([0-9A-Fa-f]{1,4}:){0,5}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|([0-9A-Fa-f]{1,4}::([0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})|(::([0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){1,7}:))$/i.test(
+    value
   );
 }
 
@@ -381,6 +387,14 @@ function adjacentUnique(str) {
   return str.replace(/(\w)\1+/g, "$1");
 }
 
+/**
+ * 隐藏所有指定标签
+ * 例: hide(document.querySelectorAll('img'))
+ */
+function hideTag(...el) {
+  [...el].forEach(e => (e.style.display = "none"));
+}
+
 module.exports = {
   isColor,
   isEmail,
@@ -395,7 +409,8 @@ module.exports = {
   isPostal,
   isQQ,
   isMoney,
-  isIP4,
+  isIPv4,
+  isIPv6,
   isDate,
   isEnglish,
   isChinese,
@@ -404,5 +419,6 @@ module.exports = {
   isBankCard,
   isDecimal,
   isWxNum,
-  adjacentUnique
+  adjacentUnique,
+  hideTag
 };
