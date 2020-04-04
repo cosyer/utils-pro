@@ -80,7 +80,7 @@ function isStrictIdCard(str) {
     71: "台湾",
     81: "香港",
     82: "澳门",
-    91: "国外"
+    91: "国外",
   };
   if (!aCity[parseInt(sId.substr(0, 2))]) {
     alert("你的身份证地区非法");
@@ -392,7 +392,29 @@ function adjacentUnique(str) {
  * 例: hide(document.querySelectorAll('img'))
  */
 function hideTag(...el) {
-  [...el].forEach(e => (e.style.display = "none"));
+  [...el].forEach((e) => (e.style.display = "none"));
+}
+
+/**
+ *
+ * @desc   数据脱敏
+ * @param  {String} str 字符串
+ * @param  {Number} beginLen 开始索引
+ * @param  {Number} endLen 结束索引
+ * @returns {String}
+ */
+
+function desensitization(str, beginLen, endLen) {
+  var len = str.length;
+  var firstStr = str.substr(0, beginLen);
+  var lastStr = str.substr(endLen);
+  var middleStr = str
+    .substring(beginLen, len - Math.abs(endLen))
+    .replace(/[\s\S]/gi, "*");
+
+  tempStr = firstStr + middleStr + lastStr;
+
+  return tempStr;
 }
 
 module.exports = {
@@ -420,5 +442,6 @@ module.exports = {
   isDecimal,
   isWxNum,
   adjacentUnique,
-  hideTag
+  hideTag,
+  desensitization,
 };
