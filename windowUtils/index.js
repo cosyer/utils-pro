@@ -18,7 +18,7 @@ function getScrollPos() {
   return {
     x:
       window.pageXOffset !== undefined ? window.pageXOffset : window.scrollLeft,
-    y: window.pageYOffset !== undefined ? window.pageYOffset : window.scrollTop
+    y: window.pageYOffset !== undefined ? window.pageYOffset : window.scrollTop,
   };
 }
 
@@ -31,7 +31,7 @@ function getScrollPos() {
 function offset(ele) {
   var pos = {
     left: 0,
-    top: 0
+    top: 0,
   };
   while (ele) {
     pos.left += ele.offsetLeft;
@@ -48,12 +48,12 @@ function offset(ele) {
  * @param {Number} duration
  */
 function scrollTo(to, duration) {
-  var requestAnimFrame = (function() {
+  var requestAnimFrame = (function () {
     return (
       window.requestAnimationFrame ||
       window.webkitRequestAnimationFrame ||
       window.mozRequestAnimationFrame ||
-      function(callback) {
+      function (callback) {
         window.setTimeout(callback, 1000 / 60);
       }
     );
@@ -65,7 +65,7 @@ function scrollTo(to, duration) {
   var diff = to - getScrollTop();
   if (diff === 0) return;
   var step = (diff / duration) * 10;
-  requestAnimFrame(function() {
+  requestAnimFrame(function () {
     if (Math.abs(step) > Math.abs(diff)) {
       setScrollTop(getScrollTop() + diff);
       return;
@@ -101,8 +101,8 @@ function setScrollTop(value) {
 
 function windowResize(downCb, upCb) {
   var clientHeight = window.innerHeight;
-  downCb = typeof downCb === "function" ? downCb : function() {};
-  upCb = typeof upCb === "function" ? upCb : function() {};
+  downCb = typeof downCb === "function" ? downCb : function () {};
+  upCb = typeof upCb === "function" ? upCb : function () {};
   window.addEventListener("resize", () => {
     var height = window.innerHeight;
     if (height === clientHeight) {
@@ -120,7 +120,7 @@ function windowResize(downCb, upCb) {
 function goTop() {
   var iScrollTop =
     document.body.scrollTop || document.documentElement.scrollTop;
-  var timer = setInterval(function() {
+  var timer = setInterval(function () {
     //定时器
     scrollTo(0, (iScrollTop -= 100));
     if (iScrollTop <= 0) {
@@ -155,7 +155,7 @@ function getCoordInDocument() {
     e.clientY + (document.documentElement.scrollTop || document.body.scrollTop);
   return {
     x: x,
-    y: y
+    y: y,
   };
 }
 
@@ -233,7 +233,7 @@ function bottomVisible() {
 }
 
 /**
- * 获取窗口可视范围的高度
+ * @desc 获取窗口可视范围的高度
  */
 function getClientHeight() {
   let clientHeight = 0;
@@ -252,7 +252,7 @@ function getClientHeight() {
 }
 
 /**
- *  获取滚动条距左边的高度
+ * @desc 获取滚动条距左边的高度
  */
 function getPageScrollLeft() {
   let a = document;
@@ -260,7 +260,7 @@ function getPageScrollLeft() {
 }
 
 /**
- * 开启全屏
+ * @desc 开启全屏
  * @param {*} element
  */
 function launchFullscreen(element) {
@@ -276,7 +276,7 @@ function launchFullscreen(element) {
 }
 
 /**
- *  关闭全屏
+ * @desc 关闭全屏
  */
 function exitFullscreen() {
   if (document.exitFullscreen) {
@@ -291,30 +291,78 @@ function exitFullscreen() {
 }
 
 /**
- * 返回当前滚动条位置
+ * @desc 返回当前滚动条位置
  */
 function getScrollPosition(el = window) {
   ({
     x: el.pageXOffset !== undefined ? el.pageXOffset : el.scrollLeft,
-    y: el.pageYOffset !== undefined ? el.pageYOffset : el.scrollTop
+    y: el.pageYOffset !== undefined ? el.pageYOffset : el.scrollTop,
   });
 }
 
 /**
- * 滚动到指定元素区域
+ * @desc 滚动到指定元素区域
  */
 function smoothScroll(element) {
   document.querySelector(element).scrollIntoView({
-    behavior: "smooth"
+    behavior: "smooth",
   });
 }
 
 /**
- * http跳转https
+ * @desc http跳转https
  */
 function httpsRedirect() {
   if (location.protocol !== "https:")
     location.replace("https://" + location.href.split("//")[1]);
+}
+
+/**
+ * @desc 加入收藏
+ */
+function add2Collection(sTitle = document.title, sURL = window.location) {
+  try {
+    window.external.addFavorite(sURL, sTitle);
+  } catch (e) {
+    try {
+      window.sidebar.addPanel(sTitle, sURL, "");
+    } catch (e) {
+      alert("加入收藏失败，请使用Ctrl+D进行添加");
+    }
+  }
+}
+
+/**
+ * @desc 设为首页
+ * @param obj element
+ */
+function setHome(obj, vrl = window.location) {
+  try {
+    obj.style.behavior = "url(#default#homepage)";
+    obj.setHomePage(vrl);
+  } catch (e) {
+    if (window.netscape) {
+      try {
+        netscape.security.PrivilegeManager.enablePrivilege(
+          "UniversalXPConnect"
+        );
+      } catch (e) {
+        alert(
+          "此操作被浏览器拒绝！\n请在浏览器地址栏输入“about:config”并回车\n然后将 [signed.applets.codebase_principal_support]的值设置为'true',双击即可。"
+        );
+      }
+      var prefs = Components.classes[
+        "@mozilla.org/preferences-service;1"
+      ].getService(Components.interfaces.nsIPrefBranch);
+      prefs.setCharPref("browser.startup.homepage", vrl);
+    } else {
+      alert(
+        "您的浏览器不支持，请按照下面步骤操作：1.打开浏览器设置。2.点击设置网页。3.输入：" +
+          vrl +
+          "点击确定。"
+      );
+    }
+  }
 }
 
 module.exports = {
@@ -334,5 +382,7 @@ module.exports = {
   launchFullscreen,
   exitFullscreen,
   getScrollPosition,
-  smoothScroll
+  smoothScroll,
+  add2Collection,
+  setHome,
 };
