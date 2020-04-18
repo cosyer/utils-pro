@@ -8,7 +8,7 @@ function digitUppercase(n) {
   var digit = ["零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"];
   var unit = [
     ["元", "万", "亿"],
-    ["", "拾", "佰", "仟"]
+    ["", "拾", "佰", "仟"],
   ];
   var head = n < 0 ? "欠" : "";
   n = Math.abs(n);
@@ -84,7 +84,7 @@ function b64DecodeUnicode(str) {
   return decodeURIComponent(
     atob(str)
       .split("")
-      .map(c => {
+      .map((c) => {
         return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
       })
       .join("")
@@ -97,7 +97,7 @@ function b64DecodeUnicode(str) {
  * @returns {String}
  */
 function hyphenToHump(str) {
-  return str.replace(/-(\w)/g, function() {
+  return str.replace(/-(\w)/g, function () {
     return arguments[1].toUpperCase();
   });
 }
@@ -141,7 +141,7 @@ function replacePhone(phone) {
 function titleCase(str) {
   // const capitalizeEveryWord = str =>
   // str.replace(/\b[a-z]/g, char => char.toUpperCase());
-  return s.toLowerCase().replace(/\b([\w|']+)\b/g, function(word) {
+  return s.toLowerCase().replace(/\b([\w|']+)\b/g, function (word) {
     //return word.slice(0, 1).toUpperCase() + word.slice(1);
     return word.replace(word.charAt(0), word.charAt(0).toUpperCase());
   });
@@ -163,10 +163,7 @@ function getFileExtension(fileName) {
  */
 function reverse(str) {
   // (str === '') ? '' : reverse(str.substr(1)) + str.charAt(0);
-  return str
-    .split()
-    .reverse()
-    .join();
+  return str.split().reverse().join();
 }
 
 /**
@@ -189,6 +186,20 @@ function trim(str, type) {
     default:
       return str;
   }
+}
+
+/**
+ * @desc 字符串转unicode编码
+ * @param {String} data
+ * @returns {String}
+ */
+function str2Unicode(data) {
+  if (data == "") return "请输入汉字";
+  var str = "";
+  for (var i = 0; i < data.length; i++) {
+    str += "\\u" + parseInt(data[i].charCodeAt(0), 10).toString(16);
+  }
+  return str;
 }
 
 /**
@@ -237,7 +248,7 @@ function i18nReplace(s, o) {
     return;
   }
   return s.replace
-    ? s.replace(/\{\s*([^\|\}]+?)\s*(?:\|([^\}]*))?\s*\}/g, function(
+    ? s.replace(/\{\s*([^\|\}]+?)\s*(?:\|([^\}]*))?\s*\}/g, function (
         match,
         key
       ) {
@@ -278,5 +289,6 @@ module.exports = {
   Base642Str,
   byteSize,
   i18nReplace,
-  outOfNum
+  outOfNum,
+  str2Unicode,
 };
