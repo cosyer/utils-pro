@@ -49,7 +49,7 @@ function fileToBase64String(
 function fileToBase64(file) {
   let reader = new FileReader();
   reader.readAsDataURL(file);
-  reader.onload = function(e) {
+  reader.onload = function (e) {
     return e.target.result;
   };
 }
@@ -99,10 +99,70 @@ function blobToFile(blob, fileName) {
   return blob;
 }
 
+/**
+ *  文件大小转换
+ *  @param { string } input
+ */
+function binaryFormatter(input) {
+  const unitArr = [
+    ["B", "BYTE"],
+    ["KB", "KI", "KIB", "K"],
+    ["MB", "MI", "MIB", "M"],
+    ["GB", "GI", "GIB", "G"],
+    ["TB", "TI", "TIB", "T"],
+    ["PB", "PI", "PIB", "P"],
+    ["EB", "EI", "EIB", "E"],
+    ["ZB", "ZI", "ZIB", "Z"],
+    ["YB", "YI", "YIB", "Y"],
+  ];
+  const k = 1024;
+  const dm = 2;
+  const pattern = /^(-?)(\d+(\.\d+)?)([A-Z]*)$/;
+  const exponentialPattern = /[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)/;
+
+  const inputStr = String(input).toUpperCase().replace(/\s+/g, "");
+
+  if (exponentialPattern.test(inputStr)) {
+    // 如果是科学计数法数字
+    return cleverToFixed(input);
+  }
+
+  if (!pattern.test(inputStr)) {
+    return input;
+  }
+
+  const splitOperator = pattern.exec(inputStr)[1];
+  const splitNumber = pattern.exec(inputStr)[2];
+  const splitUnit = pattern.exec(inputStr)[4];
+
+  let inputBytes;
+  if (splitUnit === "") {
+    inputBytes = Math.round(parseFloat(splitNumber));
+  } else {
+    const unitIndex = findIndex(unitArr, (o) => {
+      if (indexOf(o, splitUnit) > -1) {
+        return o;
+      }
+    });
+    if (unitIndex === -1) {
+      return inputStr;
+    }
+    inputBytes = Math.round(parseFloat(splitNumber)) * Math.pow(k, unitIndex);
+  }
+
+  const i =
+    inputBytes === 0 ? 0 : Math.floor(Math.log(inputBytes) / Math.log(k));
+  const op = splitOperator === "-" ? -1 : 1;
+  return (
+    op * parseFloat((inputBytes / Math.pow(k, i)).toFixed(dm)) + unitArr[i][0]
+  );
+}
+
 module.exports = {
   fileToBase64String,
   base64ToFile,
   base64ToBlob,
   blobToFile,
-  fileToBase64
+  fileToBase64,
+  binaryFormatter,
 };
