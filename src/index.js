@@ -29,6 +29,8 @@ const localStorageUtils = require("../localStorageUtils");
 const magicUtils = require("../magicUtils");
 const uuidUtils = require("../uuidUtils");
 const fileUtils = require("../fileUtils");
+const commonUtils = require("../commonUtils");
+const numberUtils = require("../numberUtils");
 
 module.exports = {
   arrayUtils,
@@ -49,5 +51,6 @@ module.exports = {
   localStorageUtils,
   magicUtils,
   uuidUtils,
-  fileUtils
+  fileUtils,
+  commonUtils,
 };

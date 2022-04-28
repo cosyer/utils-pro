@@ -253,7 +253,7 @@ function copyWithCopyRight() {
 /**
  * @desc 前端生成并下载文件
  * @param {String} fileName
- * @param {String} filePath
+ * @param {String} filePath 或者文件内容fileContent
  */
 function createAndDownloadFile(fileName, filePath) {
   // 创建隐藏的可下载链接

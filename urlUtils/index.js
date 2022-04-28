@@ -80,7 +80,7 @@ function getQueryString(name) {
  * @param  {Object} obj {name:'cosyer',age:25} => name=cosyer&age=25
  * @return {String}
  */
-function stringfyQueryString(obj) {
+function stringifyQueryString(obj) {
   if (!obj) return "";
   var pairs = [];
 
@@ -155,7 +155,7 @@ module.exports = {
   getQueryStringObject,
   objToUrl,
   getQueryString,
-  stringfyQueryString,
+  stringifyQueryString,
   currentURL,
   replaceParamVal,
   funcUrlDel

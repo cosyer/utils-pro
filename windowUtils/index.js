@@ -365,6 +365,28 @@ function setHome(obj, vrl = window.location) {
   }
 }
 
+/**
+ * @desc 申请浏览器通知权限
+ */
+function requestNotification() {
+  // 先检查浏览器是否支持
+  if ('Notification' in window) {
+    // 已同意或已拒绝都不需要发起请求
+    if (Notification.permission !== 'granted' && Notification.permission !== 'denied') {
+      Notification.requestPermission()
+    }
+  }
+}
+
+/**
+ * @desc 判断浏览器通知权限是否已授权
+ * @return Boolean
+ */
+
+function isBrowserNotificationGranted() {
+  return  Notification.permission === 'granted'
+}
+
 module.exports = {
   getScrollTop,
   offset,
@@ -385,4 +407,6 @@ module.exports = {
   smoothScroll,
   add2Collection,
   setHome,
+  requestNotification,
+  isBrowserNotificationGranted,
 };

@@ -1,5 +1,5 @@
 /**
- * 获取文件base64编码
+ * @desc 获取文件base64编码
  * @param file
  * @param format  指定文件格式
  * @param size  指定文件大小(字节)
@@ -43,7 +43,7 @@ function fileToBase64String(
 }
 
 /**
- * file转base64
+ * @desc file转base64
  * @param { * } file 图片文件
  */
 function fileToBase64(file) {
@@ -55,7 +55,7 @@ function fileToBase64(file) {
 }
 
 /**
- *  base64转file
+ *  @desc base64转file
  *  @param { base64 } base64
  *  @param { string } filename 转换后的文件名
  */
@@ -73,7 +73,7 @@ function base64ToFile(base64, filename) {
 }
 
 /**
- *  base64转blob
+ *  @desc base64转blob
  *  @param { base64 } base64
  */
 function base64ToBlob(base64) {
@@ -89,7 +89,7 @@ function base64ToBlob(base64) {
 }
 
 /**
- *  blob转file
+ *  @desc blob转file
  *  @param { blob } blob
  *  @param { string } fileName
  */
@@ -100,7 +100,7 @@ function blobToFile(blob, fileName) {
 }
 
 /**
- *  文件大小转换
+ *  @desc 文件大小转换
  *  @param { string } input
  */
 function binaryFormatter(input) {
@@ -158,6 +158,41 @@ function binaryFormatter(input) {
   );
 }
 
+/**
+ *  @desc 从文件中读取文本
+ *  @param { file: File }
+ *  @return { Promise<string> }
+ */
+function readTextFromFile(file) {
+  return new Promise(function (resolve, reject) {
+    const reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = function (e) {
+      resolve(e && e.target && e.target.result || "");
+    };
+    reader.onerror = function (error) {
+      reject(error);
+    };
+  });
+}
+
+/**
+ *  @desc 判断文件是不是csv文件
+ *  @param { file: File }
+ *  @return { Boolean }
+ */
+function isValidCsvFile(file) {
+  if (file && (file.name || file.type)) {
+    const arr = file.name.split(".");
+    const fileExtension = arr[arr.length - 1].toLowerCase();
+    const fileType = file.type.toLowerCase();
+
+    return fileExtension === "csv" || fileType === "text/csv";
+  } else {
+    return false;
+  }
+}
+
 module.exports = {
   fileToBase64String,
   base64ToFile,
@@ -165,4 +200,6 @@ module.exports = {
   blobToFile,
   fileToBase64,
   binaryFormatter,
+  readTextFromFile,
+  isValidCsvFile,
 };
